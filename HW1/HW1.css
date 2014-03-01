@@ -136,20 +136,56 @@
 }
 
 #works a {
+	font-size: 40px;
 	text-decoration: none;
 	/* make text look like 3D */
 	text-shadow: 0px 1px #333;
-	color: black;
+	color: #3799FF;
 	/* let text color transfer from white to orange */
-	-o-transition:.5s;
-	-ms-transition:.5s;
-	-moz-transition:.5s;
-	-webkit-transition:.5s;
-	transition:.5s;
+	-o-transition:.1s;
+	-ms-transition:.1s;
+	-moz-transition:.1s;
+	-webkit-transition:.1s;
+	transition:.1s;
 }
 #works a:hover {
 	color:orange;
 }
+
+#works #aTitle {
+	background: url("res/LiLogo.png") no-repeat; padding-left:40px;
+	background-size: 40px 40px;
+}
+
+#works table{
+	position: relative;
+	left: 15%;
+	width: 70%;
+	border: solid #ccc 1px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 1px #ccc; 
+    -moz-box-shadow: 0 1px 1px #ccc; 
+    box-shadow: 0 1px 1px #ccc;         
+	border-collapse: collapse;
+    border-spacing: 0;
+}
+#works th:first-child {
+    border-radius: 6px 0 0 0;
+}
+
+#works th:last-child {
+    border-radius: 0 6px 0 0;
+}
+
+#works th:only-child{
+    border-radius: 6px 6px 0 0;
+}
+#works tr:hover {
+  background: #fbf8e9;
+  transition: all 0.1s ease-in-out;     
+} 
 /* TODO - block fade effect 
 #works div {
 	width:100px;

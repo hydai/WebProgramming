@@ -1,10 +1,100 @@
-<html>
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
 <head>
-	<title>HW2</title>
+    <!-- link css from file -->
+    <script type="text/javascript" src="calculator.js"></script>
+    <link rel=stylesheet type="text/css" href="HW2.css">
+    <title>Hydai's Website - HW2 - calculator</title>
+
 </head>
+
 <body>
-	<p>
-	This is HW2 page.<br />
-	</p>
+    <!-- left banner -->
+    <div id="leftPart">
+        <div id="photoHead"></div>
+        <div id="introBlock">
+            <b id="Name"><a href="../HW1/index.html">Hung-Ying, Dai</a></b>
+            <br />
+            <a href="http://web.cs.nthu.edu.tw/" target="_blank">CS@NTHU, TW</a>
+            <br />
+            <br />
+            <a href="../HW1/index.html">About</a>
+            <br />
+            <a href="../HW1/works.html">Works</a>
+            <br />
+        </div>
+        <div id="copyright">Copyright © 2014 - hydai</div>
+    </div>
+    <!-- End of left banner -->
+    <!-- calc part -->
+
+    <div id="rightPart">
+        <img id="logo" src="res/Calc.png">
+        <br />
+        <div id="calculator">
+            <input type="text" value="EX: 1+1" id="screen"></input>
+            <table id="buttons">
+                <tr>
+                    <td>
+                        <button id="number">7</button>
+                    </td>
+                    <td>
+                        <button id="number">8</button>
+                    </td>
+                    <td>
+                        <button id="number">9</button>
+                    </td>
+                    <td>
+                        <button id="operator">+</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="number">4</button>
+                    </td>
+                    <td>
+                        <button id="number">5</button>
+                    </td>
+                    <td>
+                        <button id="number">6</button>
+                    </td>
+                    <td>
+                        <button id="operator">-</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="number">1</button>
+                    </td>
+                    <td>
+                        <button id="number">2</button>
+                    </td>
+                    <td>
+                        <button id="number">3</button>
+                    </td>
+                    <td>
+                        <button id="operator">*</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="number">0</button>
+                    </td>
+                    <td>
+                        <button id="eval">=</button>
+                    </td>
+                    <td>
+                        <button id="clear">c</button>
+                    </td>
+                    <td>
+                        <button id="operator">/</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- End of calc part -->
 </body>
+
 </html>

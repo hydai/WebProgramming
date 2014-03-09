@@ -3,8 +3,8 @@
 
 <head>
     <!-- link css from file -->
-    <script type="text/javascript" src="calculator.js"></script>
     <link rel=stylesheet type="text/css" href="HW2.css">
+    <script type="text/javascript" src="calc.js"></script>
     <title>Hydai's Website - HW2 - calculator</title>
 
 </head>
@@ -33,62 +33,74 @@
         <img id="logo" src="res/Calc.png">
         <br />
         <div id="calculator">
-            <input type="text" value="EX: 1+1" id="screen"></input>
+            <input type="text" value="EX: 1+1" id="screen" name="screen"></input>
             <table id="buttons">
                 <tr>
                     <td>
-                        <button id="number">7</button>
+                        <button id="number" onClick="AddElement(7)">7</button>
                     </td>
                     <td>
-                        <button id="number">8</button>
+                        <button id="number" onClick="AddElement(8)">8</button>
                     </td>
                     <td>
-                        <button id="number">9</button>
+                        <button id="number" onClick="AddElement(9)">9</button>
                     </td>
                     <td>
-                        <button id="operator">+</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button id="number">4</button>
+                        <button id="operator" onClick="AddElement('+')">+</button>
                     </td>
                     <td>
-                        <button id="number">5</button>
-                    </td>
-                    <td>
-                        <button id="number">6</button>
-                    </td>
-                    <td>
-                        <button id="operator">-</button>
+                        <button id="clear" onClick="Clear()">c</button>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <button id="number">1</button>
+                        <button id="number" onClick="AddElement(4)">4</button>
                     </td>
                     <td>
-                        <button id="number">2</button>
+                        <button id="number" onClick="AddElement(5)">5</button>
                     </td>
                     <td>
-                        <button id="number">3</button>
+                        <button id="number" onClick="AddElement(6)">6</button>
                     </td>
                     <td>
-                        <button id="operator">*</button>
+                        <button id="operator" onClick="AddElement('-')">-</button>
+                    </td>
+                    <td>
+                        <button id="clear" onClick="Delete()"><-</button>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <button id="number">0</button>
+                        <button id="number" onClick="AddElement(1)">1</button>
                     </td>
                     <td>
-                        <button id="eval">=</button>
+                        <button id="number" onClick="AddElement(2)">2</button>
                     </td>
                     <td>
-                        <button id="clear">c</button>
+                        <button id="number" onClick="AddElement(3)">3</button>
                     </td>
                     <td>
-                        <button id="operator">/</button>
+                        <button id="operator" onClick="AddElement('*')">*</button>
+                    </td>
+                    <td>
+                        <button id="operator" onClick="Sqrt()">sqrt</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="number" onClick="AddElement(0)">0</button>
+                    </td>
+                    <td>
+                        <button id="number" onClick="AddElement('.')">.</button>
+                    </td>
+                    <td>
+                        <button id="eval" onClick="Eval()">=</button>
+                    </td>
+                    <td>
+                        <button id="operator" onClick="AddElement('/')">/</button>
+                    </td>
+                    <td>
+                        <button id="operator" onClick="AddElement('%')">%</button>
                     </td>
                 </tr>
             </table>
@@ -96,5 +108,6 @@
     </div>
     <!-- End of calc part -->
 </body>
+
 
 </html>

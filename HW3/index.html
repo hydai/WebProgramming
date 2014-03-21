@@ -1,10 +1,93 @@
-<html>
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
 <head>
-	<title>HW3</title>
+    <!-- link css from file -->
+    <link rel=stylesheet type="text/css" href="HW3.css">
+    <script type="text/javascript" src="feedback.js"></script>
+    <title>Hydai's Website - HW3 - cookie storage</title>
 </head>
+
 <body>
-	<p>
-	This is HW3 page.<br />
-	</p>
+    <!-- left banner -->
+    <div id="leftPart">
+        <div id="photoHead"></div>
+        <div id="introBlock">
+            <b id="Name"><a href="../HW1/index.html">Hung-Ying, Dai</a></b>
+            <br />
+            <a href="http://web.cs.nthu.edu.tw/" target="_blank">CS@NTHU, TW</a>
+            <br />
+            <br />
+            <a href="../HW1/index.html">About</a>
+            <br />
+            <a href="../HW1/works.html">Works</a>
+            <br />
+        </div>
+        <div id="copyright">Copyright © 2014 - hydai</div>
+    </div>
+    <!-- End of left banner -->
+    <!-- cookie part -->
+    <div id="rightPart">
+        <img id="logo" src="res/Cookie.png">
+        <br />
+        <form>
+            <div id="title">Feedback</div>
+            <hr />
+            <div id="username">
+                您的姓名
+                <br />
+                <input type="text" id="usernameInput" placeholder="馬宗痛" size="40" maxlength="20" onchange="setCookie('usernameInput', this.form.usernameInput.value)" />
+                <br />您的身份
+                <br />
+                <select id="usertype" onchange="setCookie('usertype', this.form.usertype.value)">
+                    <option value="designer">設計師</option>
+                    <option value="teacher">教授/老師</option>
+                    <option value="student">學生</option>
+                    <option value="business">商務人士</option>
+                    <option value="other">其他</option>
+                </select>
+                <br />可以的話，請留下您的聯絡資料
+                <br />
+                <input type="text" id="useremail" placeholder="abc@gmail.com" size="40" maxlength="50" onchange="setCookie('useremail', this.form.useremail.value)" />
+            </div>
+            <hr>
+            <div id="colorFeeling">
+                請問您對整體的感覺
+                <br />
+                <input type="radio" id="cf3" name="cf" value="3" onchange="setCookie('cf', 3)">
+                <label for="cf3" id="cf3lb">好棒棒！</label>
+                <input type="radio" id="cf2" name="cf" value="2" onchange="setCookie('cf', 2)">
+                <label for="cf2" id="cf2lb">普普通～</label>
+                <input type="radio" id="cf1" name="cf" value="1" onchange="setCookie('cf', 1)">
+                <label for="cf1" id="cf1lb">爛到爆！</label>
+            </div>
+            <br />
+            <div id="placeNeedToChange">
+                請問您覺得哪邊需要改進（可以多選）
+                <br />
+                <input type="checkbox" id="pntc1" onchange="setCookie('pntc1', this.form.pntc1.checked)">
+                <label for="pntc1" id="pntc1lb">整體色調</label>
+                <input type="checkbox" id="pntc2" onchange="setCookie('pntc2', this.form.pntc2.checked)">
+                <label for="pntc2" id="pntc2lb">文字大小</label>
+                <input type="checkbox" id="pntc3" onchange="setCookie('pntc3', this.form.pntc3.checked)">
+                <label for="pntc3" id="pntc3lb">版面配置</label>
+            </div>
+            <br />
+            <!--
+            <div id="otherBlock">
+                謝謝您的填寫，如果有其他建議也歡迎提出
+                <br />
+                <textarea rows="10" cols="50" id="ob" placeholder="鹿茸就是鹿耳朵的毛" onchange="setCookie('ob', this.form.ob.value)"></textarea>
+            </div>
+            <br />
+            -->
+            <script type="text/javascript">loadCookie();</script>
+            <hr />
+            <a href="../HW3/part2.html" id="myButton">Goto Part2</a>
+        </form>
+    </div>
+    <!-- End of cookie part -->
 </body>
+
+
 </html>

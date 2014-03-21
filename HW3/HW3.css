@@ -1,0 +1,230 @@
+/***********************************************************/
+/* Basic reset */
+* {
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+/***********************************************************/
+/* setting for leftPart */
+#leftPart {
+	/* let this part fix forever */
+	position:fixed;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:30%;
+	/* set background to the gradient png */
+	background-image:url(res/GrayGriBanner.png);
+	background-repeat: repeat-x;
+	/* set font */
+	font-family: monospace;
+	font-size: 30px;
+	color: white;
+}
+
+/***********************************************************/
+/* setting for photoHead */
+#photoHead {
+	/* circle head photo */
+	background:url(res/head.jpg) no-repeat;
+	/* fix head photo size */
+	background-size: 100% 110%;
+	-moz-border-radius:1000px;
+	-webkit-border-radius:1000px;
+	border-radius:1000px;
+	/* white shadow circle */
+	box-shadow: 0px 0px 5px  5px white;
+	/* set size */
+	position: relative;
+	top: 5%;
+	left: 13%;
+	right: 15%;
+	width: 75%;
+	height: 45%;
+}
+
+/***********************************************************/
+/* setting for introBlock */
+#introBlock {
+	/* set size */
+	position: relative;
+	top: 10%;
+	left: 10%;
+	right: 10%;
+	width: 80%;
+	height: 45%;
+	/* text setting */
+	text-align:center;
+	font-size: 24px;
+}
+#Name {
+	font-size: 30px;
+}
+
+/***********************************************************/
+/* setting for copyright */
+#copyright {
+	/* set size and position */
+	position: relative;
+	bottom: 1px;
+	left: 10%;
+	right: 10%;
+	width: 80%;
+	height: 5%;
+	/* text setting */
+	text-align:center;
+	font-size: 12px;
+}
+/***********************************************************/
+/* setting for about */
+#rightPart {
+	/* let this part fix forever */
+	position:fixed;
+	top:0px;
+	right:0px;
+	width:70%;
+	height:100%;
+	/* set up the scroll bar */
+	overflow:auto;
+	/* set font */
+	font-size: 30px;
+	color: black;
+
+	/* gradient background */
+	background: white;
+	background: linear-gradient(#C4E1FF, #fff);
+	background-size: cover;
+}
+
+#rightPart form {
+	/* let this part fix forever */
+	position: relative;
+	width: 80%;
+	height: 100%;
+	left: 10%;
+	top: 2%;
+	bottom: 2%;
+	padding: 20px 20px 20px 20px;
+	
+	/* set font */
+	font-size: 32px;
+	color: #888;
+	line-height: 40px;
+    
+
+	/* background setting */
+	background: white;
+	background: linear-gradient(#fff, #C4E1FF);
+	background-size: cover;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:10px;
+}
+
+#rightPart #usernameInput, #usertype, #useremail {
+	width: 100%;
+	/* set bg color and shadow */
+	background: rgba(50, 20, 50, 0.1);
+	border-radius: 3px;
+	box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+	
+	/* set font sight */
+	font-size: 28px;
+	color: rgb(124, 124, 124);
+	text-shadow: 1px 1px 2px rgba(124, 124, 124, 0.9);
+	text-align: right;
+	letter-spacing: 1px;
+}
+
+#rightPart #ob {
+	width: 100%;
+	
+	/* set bg color and shadow */
+	background: rgba(50, 20, 50, 0.1);
+	border-radius: 3px;
+	box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+	
+	/* set font sight */
+	font-size: 28px;
+	color: rgb(124, 124, 124);
+	text-shadow: 1px 1px 2px rgba(124, 124, 124, 0.9);
+	text-align: left;
+	letter-spacing: 1px;
+}
+
+#rightPart #usertype {
+	/* set bg color and shadow */
+	background: rgba(50, 20, 50, 0.1);
+	border-radius: 3px;
+	box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+	
+	/* set font sight */
+	font-size: 28px;
+	color: rgb(124, 124, 124);
+	text-shadow: 1px 1px 2px rgba(124, 124, 124, 0.9);
+	text-align: right;
+	letter-spacing: 1px;
+}
+
+#cf1lb, #cf2lb, #cf3lb, #pntc1lb, #pntc2lb, #pntc3lb {
+	/* set font sight */
+	font-size: 24px;
+	color: rgb(124, 124, 124);
+	text-shadow: 1px 1px 2px rgba(124, 124, 124, 0.9);
+	text-align: right;
+	letter-spacing: 1px;
+}
+
+#myButton {
+    background:linear-gradient(#33bdef, #019ad2);
+    border-radius:7px;
+    border:1px solid #057fd0;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+}
+
+#myButton:hover {
+    background:linear-gradient(#019ad2, #33bdef);
+}
+
+#myButton:active {
+	/* show out the effect of a little down and back */
+    position:relative;
+    top:1px;
+}
+
+#rightPart #title {
+	font: 50px bold;
+}
+/***********************************************************/
+/* setting for about */
+#logo {
+	/* set up position */
+	position:relative;
+	top:0px;
+	left:15%;
+	width:70%;
+}
+
+/***********************************************************/
+/* setting for a */
+a {
+	text-decoration: none;
+	/* make text look like 3D */
+	text-shadow: 0px 1px #333;
+	color: white;
+	/* let text color transfer from white to orange */
+	-o-transition:.3s;
+	-ms-transition:.3s;
+	-moz-transition:.3s;
+	-webkit-transition:.3s;
+	transition:.3s;
+}
+a:link {color:white;}		/* unvisited link */
+a:visited {color:white;}	/* visited link */
+a:hover {color:orange;}		/* mouse over link */
+a:active {color:white;}		/* selected link */ 
+

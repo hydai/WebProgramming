@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<head>
+    <title>
+        Hydai's website - HW3 - Test Size of Storage
+    </title>
+</head>
+
+<body>
+    <button id="Reset" name="Reset" onClick="Reset()">Reset</button><br>
+    <button id="Add1KB" name="Add1KB" onClick="Add1KB()">Add 1024 bytes</button><br>
+    <button id="Add10KB" name="Add10KB" onClick="Add10KB()">Add 10 KB</button><br>
+    <button id="Add100KB" name="Add100KB" onClick="Add100KB()">Add 100 KB</button><br>
+    <button id="Add1000KB" name="Add1000KB" onClick="Add1000KB()">Add 1000 KB</button><br>
+    <button id="Add1MB" name="Add1MB" onClick="Add1MB()">Add 1 MB</button><br>
+</body>
+<script type="text/javascript">
+var br = "<br />";
+var char1024 = "";
+var ct = 0;
+for (i = 0; i < 1024; i++)
+    char1024 += '-';
+
+function Reset() {
+    ct = 0;
+    window.sessionStorage.clear();
+}
+if (window.localStorage) {
+    document.write(br + "可以使用 Local Storage 功能" + br);
+} else {
+    document.write("Local Storage 功能不被支援");
+}
+</script>
+
+</html>

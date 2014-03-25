@@ -1,10 +1,68 @@
-<html>
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
 <head>
-	<title>HW4</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- include codemirror code -->
+    <link rel="stylesheet" href="../lib/codemirror.css">
+    <link rel="stylesheet" href="../addon/fold/foldgutter.css">
+    <link rel="stylesheet" href="../addon/dialog/dialog.css">
+    <link rel="stylesheet" href="../theme/solarized.css">
+    <script src="../lib/codemirror.js"></script>
+    <script src="../addon/search/searchcursor.js"></script>
+    <script src="../addon/search/search.js"></script>
+    <script src="../addon/dialog/dialog.js"></script>
+    <script src="../addon/edit/matchbrackets.js"></script>
+    <script src="../addon/edit/closebrackets.js"></script>
+    <script src="../addon/comment/comment.js"></script>
+    <script src="../addon/wrap/hardwrap.js"></script>
+    <script src="../addon/selection/active-line.js"></script>
+    <script src="../addon/fold/foldcode.js"></script>
+    <script src="../addon/fold/brace-fold.js"></script>
+    <script src="../mode/clike/clike.js"></script>
+    <script src="../keymap/sublime.js"></script>
+    <!-- End of include codemirror code -->
+
+    <!-- link css from file -->
+    <link rel=stylesheet type="text/css" href="HW4.css">
+
+    <title>Hydai's Website - HW4 - Code Diff</title>
 </head>
+
 <body>
-	<p>
-	This is HW4 page.<br />
-	</p>
+    <!-- left banner -->
+    <div id="leftPart">
+        <div id="photoHead"></div>
+        <div id="introBlock">
+            <b id="Name"><a href="../HW1/index.html">Hung-Ying, Dai</a></b>
+            <br />
+            <a href="http://web.cs.nthu.edu.tw/" target="_blank">CS@NTHU, TW</a>
+            <br />
+            <br />
+            <a href="../HW1/index.html">About</a>
+            <br />
+            <a href="../HW1/works.html">Works</a>
+            <br />
+        </div>
+        <div id="copyright">Copyright © 2014 - hydai</div>
+    </div>
+    <!-- End of left banner -->
+    <!-- right part -->
+    <div id="rightPart">
+        <img id="logo" src="res/CodeDiff.png">
+        <br />
+        <br />
+        <br />
+        <!-- Code area -->
+        <div id="leftCodePanel"></div>
+        <div id="rightCodePanel"></div>
+        
+        <!-- button area -->
+        <button id="myButton">Diff Now!</button>
+    </div>
+    <!-- End of right part -->
 </body>
+
+<script type="text/javascript" src="Diff.js"></script>
+
 </html>

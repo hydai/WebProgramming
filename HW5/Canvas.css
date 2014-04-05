@@ -1,0 +1,254 @@
+/************************************************************
+ * General setting
+ ************************************************************/
+div {
+    font-family: 'Lemon', cursive;
+	font-size: 24px;
+	color: #dddddd;
+	text-align: left;
+	text-indent: 8px;
+	line-height: 80%;
+}
+/************************************************************
+ * Tool part
+ ************************************************************/
+ #toolbar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 5%;
+    height: 100%;
+    background: linear-gradient(#aaa, #777);
+}
+/************************************************************
+ * Panel part
+ ************************************************************/
+ #panel {
+    position: fixed;
+    top: 0px;
+    left: 5%;
+    /*
+	width: 80%;
+	height: 100%;
+	*/
+    background: url(res/transparent.png);
+}
+/************************************************************
+ * Toolbar part
+ ************************************************************/
+ #toolbuttonCanvas {
+    position: relative;
+    top: 0px;
+    margin: 6px;
+    background: url(res/CanvasLogo.png);
+    background-size: 100% 100%;
+    border-radius:3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 60px;
+    height: 60px;
+}
+#toolbuttonCanvas:hover {
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+#toolbuttonCanvas:active {
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+#toolbuttonPencil {
+    position: relative;
+    top: 0px;
+    margin: 6px;
+    background: url(res/edit.png);
+    background-color: gray;
+    background-size: 100% 100%;
+    border-radius:3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 60px;
+    height: 60px;
+}
+#toolbuttonPencil:hover {
+    background-color: white;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+#toolbuttonPencil:active {
+    background-color: gray;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+#toolbuttonBrush {
+    position: relative;
+    top: 0px;
+    margin: 6px;
+    background: url(res/paint_brush.png) no-repeat;
+    background-color: gray;
+    background-size: 90% 90%;
+    border-radius:3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 60px;
+    height: 60px;
+}
+#toolbuttonBrush:hover {
+    background-color: white;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+#toolbuttonBrush:active {
+    background-color: gray;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+#toolbuttonEraser {
+    position: relative;
+    top: 0px;
+    margin: 6px;
+    background: url(res/eraser.png);
+    background-color: gray;
+    background-size: 100% 100%;
+    border-radius:3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 60px;
+    height: 60px;
+}
+#toolbuttonEraser:hover {
+    background-color: white;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+#toolbuttonEraser:active {
+    background-color: gray;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+#toolbuttonSave {
+    position: relative;
+    top: 0px;
+    margin: 6px;
+    background: url(res/save.png);
+    background-color: gray;
+    background-size: 100% 100%;
+    border-radius:3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 60px;
+    height: 60px;
+}
+#toolbuttonSave:hover {
+    background-color: white;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+#toolbuttonSave:active {
+    background-color: gray;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+#toolbuttonPush {
+    position: relative;
+    top: 0px;
+    margin: 6px;
+    background: url(res/fb-logo.png);
+    background-color: gray;
+    background-size: 100% 100%;
+    border-radius:3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    width: 60px;
+    height: 60px;
+}
+#toolbuttonPush:hover {
+    background-color: white;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+#toolbuttonPush:active {
+    background-color: gray;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+/************************************************************
+ * Detailbar part
+ ************************************************************/
+ #detailbar {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 15%;
+    height: 100%;
+    background: linear-gradient(#999, #444);
+}
+#detailbarSetting {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 45%;
+}
+#previewScreen {
+    position: relative;
+    margin: 2px;
+    border: 4px solid #ccc;
+    border-radius: 3px;
+    background: url(res/transparent.png);
+}
+#colorSetting {
+    position: relative;
+    margin: 2px;
+    width: 98%;
+    height: 20%;
+    background: gray;
+}
+#colorbar {
+    position: relative;
+    float: left;
+    top: 22px;
+    left: 5px;
+    width: 70%;
+    background: #ccc;
+}
+#colorPanel {
+    position: relative;
+    float: right;
+    top: 20px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background: url(res/colorPanel.png);
+    background-color: #aaa;
+    background-size: 100% 100%;
+}
+#colorPanel:hover {
+    background-color: white;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+#colorPanel:active {
+    background-color: #ccc;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+#sizeSetting {
+    position: relative;
+    margin: 2px;
+    width: 98%;
+    height: 20%;
+}
+#sizebar {
+	position: relative;
+	margin: 10px;
+}
+#detailbarLayer {
+    position: relative;
+    top: 10px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+}

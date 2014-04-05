@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<head>
+    <!-- 
+
+
+                            ;'''''':
+                               ;''''';,
+                                 ,'''''';;,`
+                                   :'+''';;;::::,`
+                                    .+'';:::::::::,,
+                                     ,;:,,,,,,,,:::,,,
+                                      :,,:;,,,,::::::,,
+                                      ,,,,,,,,,:::::::,,
+                                      ,,,,,,,,,,:::::::,,
+                                      .,,,,,,,,::::::::,,.
+                                      .,,,,:,,,:::::::::,:
+                                      .,,,,,,,,:::::::::::
+                                      ,,,.,,,,,:::::::::::   太陽花好吃嗎？
+                                      ,,.,,,,,::::::::::::
+                                     .,..,,,,::::::::::::;   問秋意。
+                                     ,,.,,,,,::::::::::::
+                                    ,,.,,,,::::::::::::::
+                                   ,,,,,,,::::::::::::::
+                                  ,,,,,,,:::;;;::::::::,
+                                 ,,,,,,,::;;;;;::::::::
+                               `:,,,,,,::;;;;:::::::::
+                              ,:,,,,,,::;;;;;:::;::::
+                            `:,,,,,,,::;;;;;::;;:::.
+                           ::,,,,,,::;;;;;;:;;;:::
+                         ::,,,,,,::;;;;;:::;;;:::
+                       ,:,,,,,,::;;;;;;;;;;;::;`
+                     ,:,,,,,:::;;;;;;::;;;::::
+                   ,:,,,,,:::;;;;;;:::;;;;;:
+                 .:,,,,:::;;;;;;:::;;;::::
+               `::,,,:::;;;;;;:::;;;:::.
+              :,,:::::;;;;;;;::;;::::`
+            ::::::::;;;;;;;;;;:::;,
+         `;;;;;;;;;;;;;;;;:::::,
+         ;;''';:;;;;;::::::.
+          .++'';;::,.`
+      -->
+    <!-- use google font API -->
+    <link href='http://fonts.googleapis.com/css?family=Lemon|Codystar|PT+Mono' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type='text/javascript' src="base64binary.js"></script>
+    <!-- link css from file -->
+    <link rel=stylesheet type="text/css" href="Canvas.css">
+    <title>Canvas by hydai</title>
+</head>
+
+<body>
+    <!-- Use facebook api to push canvas to sb's post -->
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: "1458083554426567",
+            status: true,
+            cookie: true,
+            xfbml: true // parse XFBML
+        });
+        jQuery(document).trigger('FBSDKLoaded');
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- ^====Use facebook api to push canvas to sb's post -->
+
+    <!-- Tools area -->
+    <div id="toolbar">
+        <div id="toolbuttonCanvas"></div>
+        <div id="toolbuttonPencil"></div>
+        <div id="toolbuttonBrush"></div>
+        <div id="toolbuttonEraser"></div>
+        <div id="toolbuttonSave"></div>
+        <div id="toolbuttonPush"></div>
+    </div>
+    <!-- Detail area -->
+    <div id="detailbar">
+        <div id="detailbarSetting">
+            <canvas id="previewScreen"></canvas>
+            <hr>
+            <div id="colorSetting">
+                <div>Color:</div>
+                <input id="colorbar" value="#CA8EFF">
+                <!-- V== 真正的 color panel 讓他飛出視窗外 -->
+                <input id="color" style="position:absolute;left:3000px;" type="color">
+                <!-- V== 偽裝的 color panel 看似點擊有效 -->
+                <div id="colorPanel"></div>
+            </div>
+            <hr>
+            <div id="sizeSetting">
+                <div id="size">Size:10</div>
+                <input id="sizebar" type="range" min="1" max="40" step="0.5" value="10">
+            </div>
+        </div>
+        <hr>
+        <div id="detailbarLayer"></div>
+    </div>
+
+    <!-- Panel area -->
+    <canvas id="panel">
+
+    </canvas>
+
+</body>
+
+
+<script type="text/javascript" src="Canvas.js"></script>
+
+</html>

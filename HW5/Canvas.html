@@ -76,39 +76,57 @@
     <!-- ^====Use facebook api to push canvas to sb's post -->
 
     <!-- Tools area -->
-    <div id="toolbar">
-        <div id="toolbuttonCanvas"></div>
-        <div id="toolbuttonPencil"></div>
-        <div id="toolbuttonBrush"></div>
-        <div id="toolbuttonEraser"></div>
-        <div id="toolbuttonSave"></div>
-        <div id="toolbuttonPush"></div>
+    <div id="toolbar" class="toolbar">
+        <div id="toolbuttonCanvas" class="toolbutton"></div>
+        <div id="toolbuttonPencil" class="toolbutton"></div>
+        <div id="toolbuttonBrush" class="toolbutton"></div>
+        <div id="toolbuttonEraser" class="toolbutton"></div>
+        <div id="toolbuttonPT" class="toolbutton"></div>
+        <!-- It is too slow that PinatBucket uses bfs. Push it to TODO-list
+        <div id="toolbuttonPaintBucket" class="toolbuttonPaintBucket"></div>
+      -->
+        <div id="toolbuttonSave" class="toolbutton"></div>
+        <div id="toolbuttonPush" class="toolbutton"></div>
     </div>
     <!-- Detail area -->
-    <div id="detailbar">
-        <div id="detailbarSetting">
-            <canvas id="previewScreen"></canvas>
+    <div id="detailbar" class="detailbar">
+        <div id="detailbarSetting" class="detailbarSetting">
+            <canvas id="previewScreen" class="previewScreen"></canvas>
             <hr>
-            <div id="colorSetting">
+            <div id="colorSetting" class="colorSetting">
                 <div>Color:</div>
-                <input id="colorbar" value="#CA8EFF">
+                <input id="colorbar" class="colorbar" value="#88a8ff">
                 <!-- V== 真正的 color panel 讓他飛出視窗外 -->
                 <input id="color" style="position:absolute;left:3000px;" type="color">
                 <!-- V== 偽裝的 color panel 看似點擊有效 -->
-                <div id="colorPanel"></div>
+                <div id="colorPanel" class="colorPanel"></div>
             </div>
             <hr>
-            <div id="sizeSetting">
-                <div id="size">Size:10</div>
-                <input id="sizebar" type="range" min="1" max="40" step="0.5" value="10">
+            <div id="sizeSetting" class="Setting">
+                <div id="size">Size: 10</div>
+                <input id="sizebar" class="sizebar" type="range" min="1" max="30" step="0.5" value="10">
+            </div>
+            <hr>
+            <div id="RenderSetting" class="Setting">
+                <div id="Rendersize">Render: 0</div>
+                <input id="Rendersizebar" class="sizebar" type="range" min="4" max="20" step="0.5" value="4">
+                <hr class="clean">
+            </div>
+            <div id="PTSetting" class="Setting">
+                <div>Type:</div><br>
+                <div id="PTline" class="PTbutton"></div>
+                <div id="PTcircle" class="PTbutton"></div>
+                <div id="PTrect" class="PTbutton"></div>
+                <hr class="clean">
             </div>
         </div>
-        <hr>
+        <!--// TODO: Dynamic canvas layer
         <div id="detailbarLayer"></div>
+      -->
     </div>
 
     <!-- Panel area -->
-    <canvas id="panel">
+    <canvas id="panel" class="panel">
 
     </canvas>
 

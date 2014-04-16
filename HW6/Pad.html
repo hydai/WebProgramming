@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- use google font API -->
+    <link href='http://fonts.googleapis.com/css?family=Lemon|Codystar|PT+Mono' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <!--
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,drawing"></script>-->
+    <link rel=stylesheet type="text/css" href="Pad.css">
+</head>
+
+<body>
+    <div id="score">
+        <div id="ratio">Ratio: 0 / 1119 = 0 %</div>
+        <div id="geo">
+            Reverse Geocoding
+            <br>
+            <input id="llng" type="text" value="24.7941898, 120.9914202">
+            <input id="submit" type="button" value="Go" onclick="codeLatLng()">
+        </div>
+        <div id="title">
+            <div id="titleName">Title: Beginner</div>
+            <input id="share" type="button" style="font-size: 35px;" onclick="share();" value="Share">
+        </div>
+    </div>
+    <div id="map_canvas"></div>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box" width="50" size="50">
+    <div id="blackScreen">
+        <div id="done">
+            <br>
+            <img src="res/egg.png" />
+            <br>
+            <br>
+            <br>Congratulation!
+            <br>You have catched this monster!!
+        </div>
+        <div id="raw">
+            <img id="monsterIcon" src="res/pad-banner/1.jpg" />
+            <br>
+            <br>
+            <div id="monsterID">No. 1</div>
+        </div>
+    </div>
+    <script type="text/javascript" src="padIcon.js"></script>
+    <script type="text/javascript" src="Pad.js"></script>
+</body>
+
+</html>

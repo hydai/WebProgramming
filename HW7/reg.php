@@ -9,7 +9,6 @@ $errmsg_arr = array();
 $errflag = false;
 
 // new data
-
 $account = $_POST['account'];
 $password = $_POST['password'];
 $name = $_POST['name'];

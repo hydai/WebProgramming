@@ -5,25 +5,25 @@ include("dbInc.php");
 
 <?php
 if($_SESSION['ACCOUNT']!=null){ // 如果登入過，則直接轉到登入後頁面
-echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
+    echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
 }
 else {
-$acc = $_POST['account'];
-$pwd = $_POST['password'];
-$acc = preg_replace("/[^A-Za-z0-9]/","",$acc);
-$pwd = preg_replace("/[^A-Za-z0-9]/","",$pwd);
-if($acc!=NULL && $pwd!=NULL){
-$sql = "SELECT * FROM USER where ACCOUNT = '$acc'";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
-// 比對密碼
-if($row['PWD']==md5($pwd)){
-$_SESSION['ACCOUNT'] = $row['ACCOUNT'];
-$_SESSION['PWD'] = $row['PWD'];
-$_SESSION['NICKNAME'] = $row['NICKNAME'];
-echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
-}
-}
+    $acc = $_POST['account'];
+    $pwd = $_POST['password'];
+    $acc = preg_replace("/[^A-Za-z0-9]/","",$acc);
+    $pwd = preg_replace("/[^A-Za-z0-9]/","",$pwd);
+    if($acc!=NULL && $pwd!=NULL){
+        $sql = "SELECT * FROM USER where ACCOUNT = '$acc'";
+        $result = mysql_query($sql);
+        $row = mysql_fetch_array($result);
+        // 比對密碼
+        if($row['PWD']==md5($pwd)){
+            $_SESSION['ACCOUNT'] = $row['ACCOUNT'];
+            $_SESSION['PWD'] = $row['PWD'];
+            $_SESSION['NICKNAME'] = $row['NICKNAME'];
+            echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
+        }
+    }
 
 }
 ?>

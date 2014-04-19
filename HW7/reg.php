@@ -51,6 +51,7 @@ if ($errflag == false) {
     // query
     $password = md5($password);
     $sql = "INSERT INTO USER (ID, ACCOUNT, PWD, NAME, NICKNAME, SEX, EMAIL) VALUES ('','$account','$password','$name','$nickname','$sex','$email')";
+    mysql_query($sql);
     // save data to session
     $_SESSION['ACCOUNT'] = $account;
     $_SESSION['PWD'] = $password;

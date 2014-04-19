@@ -21,6 +21,9 @@ else {
             $_SESSION['ACCOUNT'] = $row['ACCOUNT'];
             $_SESSION['PWD'] = $row['PWD'];
             $_SESSION['NICKNAME'] = $row['NICKNAME'];
+            $_SESSION['NAME'] = $row['NAME'];
+            $_SESSION['SEX'] = $row['SEX'];
+            $_SESSION['EMAIL'] = $row['EMAIL'];
             echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
         }
     }

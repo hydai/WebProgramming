@@ -4,7 +4,7 @@ include("dbInc.php");
 ?>
  
 <?php
-if($_SESSION['id']==null){
+if($_SESSION['ACCOUNT']==null){
     echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
 }
 ?>
@@ -15,7 +15,12 @@ if($_SESSION['id']==null){
 <body bgcolor="#ccccff">
  
 <?php
-echo "Hi, ".$_SESSION['id']."(".$_SESSION['nickName'].")";
+echo "Hi, ".$_SESSION['ACCOUNT']."<br>";
+echo "PWD: ".$_SESSION['PWD']."<br>";
+echo "NAME: ".$_SESSION['NAME']."<br>";
+echo "NICKNAME: ".$_SESSION['NICKNAME']."<br>";
+echo "SEX: ".$_SESSION['SEX']."<br>";
+echo "EMAIL: ".$_SESSION['EMAIL']."<br>";
 ?>
  
 <a href="logout.php">登出</a>

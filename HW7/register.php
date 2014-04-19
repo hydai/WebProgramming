@@ -5,22 +5,7 @@ include("dbInc.php");
 
 <?php
 if($_SESSION['ACCOUNT']!=null){ // 如果登入過，則直接轉到登入後頁面
-   echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
-}
-else {
-   $acc = $_POST['account'];
-   $pwd = $_POST['password'];
-   $acc = preg_replace("/[^A-Za-z0-9]/","",$acc);
-   $pwd = preg_replace("/[^A-Za-z0-9]/","",$pwd);
-   if($acc!=NULL && $pwd!=NULL){
-      $sql = "SELECT ACCOUNT FROM USER where ACCOUNT = '$acc'";
-      $result = mysql_query($sql);
-      $row = mysql_fetch_array($result);
-      if($row['PWD']==md5($pwd)){
-         echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
-      }
-   }
-
+    echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
 }
 ?>
 
@@ -37,12 +22,12 @@ session_start();
 ?>
 <?php
 if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
-   echo '<ul style="padding:0; color:red;">';
-   foreach($_SESSION['ERRMSG_ARR'] as $msg) {
-      echo '<li>',$msg,'</li>';
-   }
-   echo '</ul>';
-   unset($_SESSION['ERRMSG_ARR']);
+    echo '<ul style="padding:0; color:red;">';
+    foreach($_SESSION['ERRMSG_ARR'] as $msg) {
+        echo '<li>',$msg,'</li>';
+    }
+    echo '</ul>';
+    unset($_SESSION['ERRMSG_ARR']);
 }
 ?>
       <form action="reg.php" method="post">

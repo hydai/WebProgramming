@@ -11,12 +11,22 @@ $errflag = false;
 // new data
 $account = $_POST['account'];
 $password = $_POST['password'];
+$passwordRepeat = $_POST['passwordrepeat'];
 $name = $_POST['name'];
 $nickname = $_POST['nickname'];
 $sex = $_POST['sex'];
 $email = $_POST['email'];
 
 $accRep = preg_replace("/[A-Za-z0-9]/","",$account);
+$account = preg_replace("/[^A-Za-z0-9]/", "", $account);
+
+$test_username_sql = "SELECT * from USER WHERE ACCOUNT = '".$account."'";
+$test_username_result = mysql_query($test_username_sql);
+while ($tmp = mysql_fetch_array($test_username_result)) {
+    $errmsg_arr[] = 'Account has been used.';
+    $errflag = true;
+    break;
+}
 if($account == '') {
     $errmsg_arr[] = 'Account cannot be empty.';
     $errflag = true;
@@ -32,6 +42,10 @@ if($password == '') {
     $errflag = true;
 } else if (strlen($password) < 7) {
     $errmsg_arr[] = 'Password is too short.';
+    $errflag = true;
+}
+if($passwordRepeat != $password) {
+    $errmsg_arr[] = 'Password is different.';
     $errflag = true;
 }
 if($name == '') {

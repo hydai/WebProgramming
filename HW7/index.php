@@ -17,7 +17,6 @@ if($_SESSION['ACCOUNT']==null){
 
 <?php
 echo "Hi, ".$_SESSION['ACCOUNT']."<br>";
-echo "PWD: ".$_SESSION['PWD']."<br>";
 echo "NAME: ".$_SESSION['NAME']."<br>";
 echo "NICKNAME: ".$_SESSION['NICKNAME']."<br>";
 echo "SEX: ".$_SESSION['SEX']."<br>";
@@ -25,6 +24,7 @@ echo "EMAIL: ".$_SESSION['EMAIL']."<br>";
 ?>
 
 <a href="logout.php">登出</a>
+<a href="update.php">修改資料</a>
 
 </body>
 </html>

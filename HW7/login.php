@@ -39,7 +39,7 @@ else {
 
       <form action="login.php" method="post">
          帳號：<input type="text" name="account"><br/>
-         密碼：<input type="text" name="password"><br/>
+         密碼：<input type="password" name="password" autocomplete="off"><br/>
          <br/>
          <input type="submit" value="Log in">
          <input type="button" onclick="window.location='register.php'" value="Sign Up">

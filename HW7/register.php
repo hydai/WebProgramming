@@ -29,12 +29,13 @@ if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count
 }
 ?>
       <form action="reg.php" method="post">
-         帳號：<input type="text" name="account" placeholder="A-Z, 0-9, a-z, length >= 6"><br/>
-         密碼：<input type="text" name="password" placeholder="length >= 7"><br/>
-         姓名：<input type="text" name="name" placeholder="yourName"><br/>
-         暱稱：<input type="text" name="nickname" placeholder="yourNickname"><br/>
-         性別：<input type="text" name="sex" placeholder="Male/Female"><br/>
-         E-mail：<input type="text" name="email" placeholder="youremail@example.com"><br/>
+         帳號：<input type="text" name="account" placeholder="A-Z, 0-9, a-z, length >= 6" autocomplete="off"><br/>
+         密碼：<input type="password" name="password" placeholder="length >= 7" autocomplete="off"><br/>
+         密碼確認：<input type="password" name="passwordrepeat" placeholder="Repeat above" autocomplete="off"><br/>
+         姓名：<input type="text" name="name" placeholder="yourName" autocomplete="off"><br/>
+         暱稱：<input type="text" name="nickname" placeholder="yourNickname" autocomplete="off"><br/>
+         性別：<input type="text" name="sex" placeholder="Male/Female" autocomplete="off"><br/>
+         E-mail：<input type="text" name="email" placeholder="youremail@example.com" autocomplete="off"><br/>
          <input type="submit">
       </form>
 

@@ -14,7 +14,10 @@ $password = $_POST['password'];
 $passwordRepeat = $_POST['passwordrepeat'];
 $name = $_POST['name'];
 $nickname = $_POST['nickname'];
+/* Not support Sex now
 $sex = $_POST['sex'];
+ */
+$sex = 0;
 $email = $_POST['email'];
 
 $accRep = preg_replace("/[A-Za-z0-9]/","",$account);
@@ -52,10 +55,12 @@ if($name == '') {
     $errmsg_arr[] = 'Your name cannot be empty.';
     $errflag = true;
 }
+/* Not support Sex now
 if($sex == '') {
     $errmsg_arr[] = 'Please enter your sex.';
     $errflag = true;
 }
+ */
 if($email == '') {
     $errmsg_arr[] = 'E-mail cannot be empty.';
     $errflag = true;

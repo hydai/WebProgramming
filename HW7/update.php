@@ -37,7 +37,9 @@ if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count
         密碼確認：<input type="password" name="passwordrepeat" placeholder="Repeat above" autocomplete="off"><br/>
         姓名：<input type="text" name="name" placeholder="yourName" autocomplete="off" value="<?php echo $_SESSION['NAME'];?>"><br/>
         暱稱：<input type="text" name="nickname" placeholder="yourNickname" autocomplete="off" value="<?php echo $_SESSION['NICKNAME'];?>"><br/>
+<!-- Not support Sex now
         性別：<input type="text" name="sex" placeholder="Male/Female" autocomplete="off" value="<?php echo $_SESSION['SEX'];?>"><br/>
+-->
         E-mail：<input type="text" name="email" placeholder="youremail@example.com" autocomplete="off" value="<?php echo $_SESSION[EMAIL];?>"><br/>
         <input type="submit" value="Submit">
          <input type="button" onclick="window.location='index.php'" value="Cancel">

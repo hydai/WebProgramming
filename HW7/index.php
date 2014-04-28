@@ -16,15 +16,12 @@ if($_SESSION['ACCOUNT']==null){
 <body bgcolor="#ccccff">
 
 <?php
-echo "Hi, ".$_SESSION['ACCOUNT']."<br>";
-echo "NAME: ".$_SESSION['NAME']."<br>";
-echo "NICKNAME: ".$_SESSION['NICKNAME']."<br>";
-echo "SEX: ".$_SESSION['SEX']."<br>";
-echo "EMAIL: ".$_SESSION['EMAIL']."<br>";
+echo "Hi, user ".$_SESSION['NAME']."(".$_SESSION['NICKNAME'].")<br>";
+echo "Your email: ".$_SESSION['EMAIL']."<br><br>";
 ?>
-
 <a href="logout.php">登出</a>
 <a href="update.php">修改資料</a>
+<hr>
 
 </body>
 </html>

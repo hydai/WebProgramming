@@ -38,7 +38,7 @@ else {
    <body bgcolor="#ccccff">
 
       <form action="login.php" method="post">
-         帳號：<input type="text" name="account"><br/>
+         帳號：<input type="text" name="account" autocomplete="off"><br/>
          密碼：<input type="password" name="password" autocomplete="off"><br/>
          <br/>
          <input type="submit" value="Log in">

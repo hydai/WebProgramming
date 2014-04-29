@@ -11,7 +11,7 @@ if($_SESSION['ACCOUNT']==null){
 
 <?php
 function loadPostWall() {
-    $getPostSql = "SELECT * FROM MESSAGE WHERE OWNERID='".$_SESSION['ID']."' ORDER BY POSTID DESC";
+    $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$_SESSION['ID']."' AND MASTERID='0') ORDER BY POSTID DESC";
     $getPostResult = mysql_query($getPostSql);
     while ($posts = mysql_fetch_array($getPostResult)) {
         getMessage($posts);

@@ -49,16 +49,16 @@ if ($homeID != 0) {
     }
 ?>
 <?php
-function loadPostWall() {
+function loadPostWall($homeID, $homeInfo) {
     $getPostSql = "";
     if ($isFriends == true) {
-        $getPostSql = "SELECT * FROM MESSAGE WHERE OWNERID='".$_SESSION['ID']."' ORDER BY POSTID DESC";
+        $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$homeID."' AND MASTERID='0') ORDER BY POSTID DESC";
     } else {
-        $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$_SESSION['ID']."' AND TYPE='0') ORDER BY POSTID DESC";
+        $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$homeID."' AND TYPE='0' AND MASTERID='0') ORDER BY POSTID DESC";
     }
     $getPostResult = mysql_query($getPostSql);
     while ($posts = mysql_fetch_array($getPostResult)) {
-        getMessage($posts);
+        getMessage($posts, $homeInfo);
     }
 }
 function removePost($removeID) {
@@ -84,18 +84,22 @@ function loadReply($id) {
         getReplyMessage($posts);
     }
 }
-function getMessage($cur){
+function getMessage($cur, $homeInfo){
     $messageID = $cur['OWNERID'];
     if ($messageID == $_SESSION['ID']) {
         $title = $_SESSION['NICKNAME'];
     } else {
-        $title = "Not support friends' posts now";
+        $title = $homeInfo['NICKNAME'];
     }
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
     echo "<table border=\"1\"><tr>";
     echo "<td>Master: ".$title."</td>";
-    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    if ($_SESSION['ID'] != $cur['OWNERID']) {
+        echo '<td><input type="button" value="Delete" disabled="disabled"></td></tr>';
+    } else {
+        echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    }
     echo "<tr><td colspan=\"2\">".$message."</td></tr>";
     //TODO: Reply message
     loadReply($cur['POSTID']);
@@ -104,6 +108,7 @@ function getMessage($cur){
     echo '<textarea name="reply" cols="45" rows="3" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="留言......"></textarea>';
     //echo '</td><td>';
     echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
+    echo '<input type="hidden" name="owner" value="'.$cur['OWNERID'].'">';
     echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
     echo '<input type="submit" value="送出">';
     echo '</form>';
@@ -133,7 +138,7 @@ else {
 <hr>
 <?php
 // TODO: Post wall
-loadPostWall();
+loadPostWall($homeID, $homeInfo);
 ?>
 </body>
 </html>

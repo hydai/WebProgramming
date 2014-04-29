@@ -27,6 +27,20 @@ if ($homeID != 0) {
     }
 }
 ?>
+<?php
+    function friendOption($homeID) {
+        $tmp = $_SESSION['ID'];
+        $getFriendSql = "SELECT * FROM FRIEND WHERE ( MASTER='$tmp' AND SLAVE='$homeID' )";
+        $getFriendResult = mysql_query($getFriendSql);
+        if ($homeID != $_SESSION['ID'] && mysql_num_rows($getFriendResult) == 0) {
+            echo '<form action="addFriend.php" method="post">';
+            echo '<input type="submit" value="加好友">';
+            echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
+            echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
+            echo '</form>';
+        }
+    }
+?>
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
@@ -39,17 +53,12 @@ if ($homeID == 0) {
 }
 else {
     echo "Welcome to ".$homeInfo['NAME']."(".$homeInfo['NICKNAME'].")'s page!<br>";
-    if ($homeID != $_SESSION['ID']) {
-        echo '<form action="addFriend.php" method="post">';
-        echo '<input type="submit" value="加好友">';
-        echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
-        echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
-        echo '</form>';
-    }
+    echo "<hr>";
+    friendOption($homeID);
 }
 ?>
 
-<a href="index.php">回到首頁</a>
+<input type="button" onclick="window.location='index.php'" value="回到首頁">
 
 </body>
 </html>

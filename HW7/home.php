@@ -32,7 +32,9 @@ if ($homeID != 0) {
         $tmp = $_SESSION['ID'];
         $getFriendSql = "SELECT * FROM FRIEND WHERE ( MASTER='$tmp' AND SLAVE='$homeID' )";
         $getFriendResult = mysql_query($getFriendSql);
-        if ($homeID != $_SESSION['ID'] && mysql_num_rows($getFriendResult) == 0) {
+        if ($homeID != $_SESSION['ID']) {
+            if (mysql_num_rows($getFriendResult) == 0) {
+            }
             echo '<form action="addFriend.php" method="post">';
             echo '<input type="submit" value="加好友">';
             echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';

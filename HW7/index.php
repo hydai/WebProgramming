@@ -13,11 +13,14 @@ if($_SESSION['ACCOUNT']==null){
 function loadPostWall() {
     $getPostSql = "SELECT * FROM MESSAGE WHERE OWNERID='".$_SESSION['ID']."' ORDER BY POSTID DESC";
     $getPostResult = mysql_query($getPostSql);
-    echo '<form action="deletePost.php" method="post">';
     while ($posts = mysql_fetch_array($getPostResult)) {
         getMessage($posts);
     }
-    echo '</form>';
+}
+function removePost($removeID) {
+    $removePost = "DELETE FROM MESSAGE WHERE (POSTID='$removeID' OR MASTERID='$removeID')";
+    mysql_query($removePost);
+    header("location: index.php");
 }
 function loadFriendList() {
     echo "Friend list is loading";
@@ -33,8 +36,11 @@ function getMessage($cur){
     $message = str_replace("\n", "<br/>", $message);
     echo "<table border=\"1\"><tr>";
     echo "<td>".$title."</td>";
-    echo '<td><input type="button" name="delete" value="'.$cur['POSTID'].'"></td>';
+    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></tr>';
     echo "<tr><td colspan=\"3\">".$message."</td></tr>";
+    /* TODO:Reply
+    echo "<tr><td><textarea name=></td></tr>"
+     */
     echo "</table><br/>";
 }
 ?>

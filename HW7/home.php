@@ -2,6 +2,12 @@
 session_start();
 include("dbInc.php");
 ?>
+
+<?php
+if($_SESSION['ACCOUNT']==null){
+    echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+}
+?>
 <?php
 $temparray=explode("=",$_SERVER[QUERY_STRING]);
 $homeID = (int)$temparray[1];
@@ -33,6 +39,13 @@ if ($homeID == 0) {
 }
 else {
     echo "Welcome to ".$homeInfo['NAME']."(".$homeInfo['NICKNAME'].")'s page!<br>";
+    if ($homeID != $_SESSION['ID']) {
+        echo '<form action="addFriend.php" method="post">';
+        echo '<input type="submit" value="加好友">';
+        echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
+        echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
+        echo '</form>';
+    }
 }
 ?>
 

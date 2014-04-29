@@ -25,6 +25,24 @@ function removePost($removeID) {
 function loadFriendList() {
     echo "Friend list is loading";
 }
+function getReplyMessage($cur) {
+    $getUserNicknameSql = "SELECT NICKNAME FROM USER WHERE ID = '".$cur['OWNERID']."'";
+    $getUserNicknameResult = mysql_query($getUserNicknameSql);
+    $tmp = mysql_fetch_array($getUserNicknameResult);
+    $message = htmlspecialchars($cur['MESSAGE']);
+    $message = str_replace("\n", "<br/>", $message);
+
+    echo "<tr><td>Reply: ".$tmp['NICKNAME']."</td>";
+    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
+}
+function loadReply($id) {
+    $getPostSql = "SELECT * FROM MESSAGE WHERE MASTERID='".$id."'";
+    $getPostResult = mysql_query($getPostSql);
+    while ($posts = mysql_fetch_array($getPostResult)) {
+        getReplyMessage($posts);
+    }
+}
 function getMessage($cur){
     $messageID = $cur['OWNERID'];
     if ($messageID == $_SESSION['ID']) {
@@ -35,13 +53,21 @@ function getMessage($cur){
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
     echo "<table border=\"1\"><tr>";
-    echo "<td>".$title."</td>";
-    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></tr>';
-    echo "<tr><td colspan=\"3\">".$message."</td></tr>";
-    /* TODO:Reply
-    echo "<tr><td><textarea name=></td></tr>"
-     */
-    echo "</table><br/>";
+    echo "<td>Master: ".$title."</td>";
+    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
+    //TODO: Reply message
+    loadReply($cur['POSTID']);
+    echo "<tr><td colspan=\"2\">";
+    echo '<form action="replyPost.php" method="post">';
+    echo '<textarea name="reply" cols="45" rows="3" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="留言......"></textarea>';
+    //echo '</td><td>';
+    echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
+    echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
+    echo '<input type="submit" value="送出">';
+    echo '</form>';
+    echo '</td></tr>';
+    echo "</table><br><br>";
 }
 ?>
 <!DOCTYPE html>

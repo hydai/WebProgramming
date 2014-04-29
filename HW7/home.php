@@ -41,6 +41,64 @@ if ($homeID != 0) {
         }
     }
 ?>
+<?php
+function loadPostWall() {
+    $getPostSql = "SELECT * FROM MESSAGE WHERE OWNERID='".$_SESSION['ID']."' ORDER BY POSTID DESC";
+    $getPostResult = mysql_query($getPostSql);
+    while ($posts = mysql_fetch_array($getPostResult)) {
+        getMessage($posts);
+    }
+}
+function removePost($removeID) {
+    $removePost = "DELETE FROM MESSAGE WHERE (POSTID='$removeID' OR MASTERID='$removeID')";
+    mysql_query($removePost);
+    header("location: index.php");
+}
+function getReplyMessage($cur) {
+    $getUserNicknameSql = "SELECT NICKNAME FROM USER WHERE ID = '".$cur['OWNERID']."'";
+    $getUserNicknameResult = mysql_query($getUserNicknameSql);
+    $tmp = mysql_fetch_array($getUserNicknameResult);
+    $message = htmlspecialchars($cur['MESSAGE']);
+    $message = str_replace("\n", "<br/>", $message);
+
+    echo "<tr><td>Reply: ".$tmp['NICKNAME']."</td>";
+    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
+}
+function loadReply($id) {
+    $getPostSql = "SELECT * FROM MESSAGE WHERE MASTERID='".$id."'";
+    $getPostResult = mysql_query($getPostSql);
+    while ($posts = mysql_fetch_array($getPostResult)) {
+        getReplyMessage($posts);
+    }
+}
+function getMessage($cur){
+    $messageID = $cur['OWNERID'];
+    if ($messageID == $_SESSION['ID']) {
+        $title = $_SESSION['NICKNAME'];
+    } else {
+        $title = "Not support friends' posts now";
+    }
+    $message = htmlspecialchars($cur['MESSAGE']);
+    $message = str_replace("\n", "<br/>", $message);
+    echo "<table border=\"1\"><tr>";
+    echo "<td>Master: ".$title."</td>";
+    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
+    //TODO: Reply message
+    loadReply($cur['POSTID']);
+    echo "<tr><td colspan=\"2\">";
+    echo '<form action="replyPost.php" method="post">';
+    echo '<textarea name="reply" cols="45" rows="3" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="留言......"></textarea>';
+    //echo '</td><td>';
+    echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
+    echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
+    echo '<input type="submit" value="送出">';
+    echo '</form>';
+    echo '</td></tr>';
+    echo "</table><br><br>";
+}
+?>
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
@@ -60,5 +118,10 @@ else {
 
 <input type="button" onclick="window.location='index.php'" value="回到首頁">
 
+<hr>
+<?php
+// TODO: Post wall
+loadPostWall();
+?>
 </body>
 </html>

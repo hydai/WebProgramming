@@ -6,6 +6,8 @@ include("dbInc.php");
 <?php
 if($_SESSION['ACCOUNT']==null){
     echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+} else {
+    $isFriends = false;
 }
 ?>
 <?php
@@ -33,19 +35,27 @@ if ($homeID != 0) {
         $getFriendSql = "SELECT * FROM FRIEND WHERE ( MASTER='$tmp' AND SLAVE='$homeID' )";
         $getFriendResult = mysql_query($getFriendSql);
         if ($homeID != $_SESSION['ID']) {
-            if (mysql_num_rows($getFriendResult) == 0) {
+            if (mysql_num_rows($getFriendResult) > 0) {
+                echo '<input type=button value="已加好友" disabled="disabled">';
+                $isFriends = true;
+            } else {
+                echo '<form action="addFriend.php" method="post">';
+                echo '<input type="submit" value="加好友">';
+                echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
+                echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
+                echo '</form>';
             }
-            echo '<form action="addFriend.php" method="post">';
-            echo '<input type="submit" value="加好友">';
-            echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
-            echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
-            echo '</form>';
         }
     }
 ?>
 <?php
 function loadPostWall() {
-    $getPostSql = "SELECT * FROM MESSAGE WHERE OWNERID='".$_SESSION['ID']."' ORDER BY POSTID DESC";
+    $getPostSql = "";
+    if ($isFriends == true) {
+        $getPostSql = "SELECT * FROM MESSAGE WHERE OWNERID='".$_SESSION['ID']."' ORDER BY POSTID DESC";
+    } else {
+        $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$_SESSION['ID']."' AND TYPE='0') ORDER BY POSTID DESC";
+    }
     $getPostResult = mysql_query($getPostSql);
     while ($posts = mysql_fetch_array($getPostResult)) {
         getMessage($posts);
@@ -90,7 +100,7 @@ function getMessage($cur){
     //TODO: Reply message
     loadReply($cur['POSTID']);
     echo "<tr><td colspan=\"2\">";
-    echo '<form action="replyPost.php" method="post">';
+    echo '<form action="sendReply.php" method="post">';
     echo '<textarea name="reply" cols="45" rows="3" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="留言......"></textarea>';
     //echo '</td><td>';
     echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';

@@ -8,7 +8,8 @@ if($_SESSION['ACCOUNT']==null){ // 如果沒登入過，則直接轉到登入頁
     echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
 }
 else {
-    $postStr = $_POST['type'];
+    $type = $_POST['type'];
+    $text = mysql_real_escape_string($_POST["postStr"]);
     if($_SESSION['ACCOUNT']!=NULL && $_SESSION['ID']==NULL){
         $getUserIDsql = "SELECT ID FROM USER where ACCOUNT = '".$_SESSION['ACCOUNT']."'";
         $getUserIDsqlResult = mysql_query($getUserIDsql);
@@ -16,7 +17,8 @@ else {
         $_SESSION['ID'] = $row['ID'];
     }
     $ownerID = $_SESSION['ID'];
-    $insertPost = "INSERT INTO MESSAGE (OWNERID, TYPE, MESSAGE, MASTERID) VALUES ('$ownerID','$type','$postStr','0')";
+    $insertPost = "INSERT INTO MESSAGE (OWNERID, TYPE, MESSAGE, MASTERID) VALUES ('$ownerID','$type','$text','0')";
     mysql_query($insertPost);
+    header("location: index.php");
 }
 ?>

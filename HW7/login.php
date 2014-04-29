@@ -18,6 +18,7 @@ else {
         $row = mysql_fetch_array($result);
         // 比對密碼
         if($row['PWD']==md5($pwd)){
+            $_SESSION['ID'] = $row['ID'];
             $_SESSION['ACCOUNT'] = $row['ACCOUNT'];
             $_SESSION['PWD'] = $row['PWD'];
             $_SESSION['NICKNAME'] = $row['NICKNAME'];

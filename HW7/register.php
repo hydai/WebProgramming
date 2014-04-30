@@ -39,6 +39,7 @@ if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count
 -->
          E-mail：<input type="text" name="email" placeholder="youremail@example.com" autocomplete="off"><br/>
          <input type="submit">
+         <input type="button" onclick="window.location='login.php'" value="Cancel">
       </form>
 
 </body></html>

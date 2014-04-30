@@ -36,7 +36,11 @@ if ($homeID != 0) {
         $getFriendResult = mysql_query($getFriendSql);
         if ($homeID != $_SESSION['ID']) {
             if (mysql_num_rows($getFriendResult) > 0) {
-                echo '<input type=button value="已加好友" disabled="disabled">';
+                echo '<form action="removeFriend.php" method="post">';
+                echo '<input type="submit" value="已加好友，按此鍵刪除">';
+                echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
+                echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
+                echo '</form>';
                 $isFriends = true;
             } else {
                 echo '<form action="addFriend.php" method="post">';
@@ -50,6 +54,18 @@ if ($homeID != 0) {
 ?>
 <?php
 function loadPostWall($homeID, $homeInfo) {
+    $tmp = $_SESSION['ID'];
+    $getFriendSql = "SELECT * FROM FRIEND WHERE ( MASTER='$tmp' AND SLAVE='$homeID' )";
+    $getFriendResult = mysql_query($getFriendSql);
+    if ($homeID != $_SESSION['ID']) {
+        if (mysql_num_rows($getFriendResult) > 0) {
+            $isFriends = true;
+        } else {
+            $isFriends = false;
+        }
+    } else {
+        $isFriends = true;
+    }
     $getPostSql = "";
     if ($isFriends == true) {
         $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$homeID."' AND MASTERID='0') ORDER BY POSTID DESC";
@@ -74,7 +90,11 @@ function getReplyMessage($cur) {
     $message = str_replace("\n", "<br/>", $message);
 
     echo "<tr><td>Reply: ".$tmp['NICKNAME']."</td>";
-    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    if ($cur['OWNERID'] != $_SESSION['ID']) {
+        echo '<td><input type="button" value="Delete" disabled="disabled"></td></tr>';
+    } else {
+        echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+    }
     echo "<tr><td colspan=\"2\">".$message."</td></tr>";
 }
 function loadReply($id) {

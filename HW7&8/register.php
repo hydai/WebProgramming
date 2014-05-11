@@ -12,13 +12,16 @@ if($_SESSION['ACCOUNT']!=null){ // 如果登入過，則直接轉到登入後頁
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
+<title>Fakebook - Register</title>
+    <!-- use google font API -->
+    <link href='http://fonts.googleapis.com/css?family=Lemon|Codystar|PT+Mono' rel='stylesheet' type='text/css'>
+    <link href='main.css' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
    <body bgcolor="#ccccff">
 
 <?php
 session_start();
-?>
-<?php
 if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
     echo '<ul style="padding:0; color:red;">';
     foreach($_SESSION['ERRMSG_ARR'] as $msg) {

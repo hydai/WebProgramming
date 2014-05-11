@@ -74,12 +74,12 @@ function getMessage($cur){
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
     <title>Fakebook - Home</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://m101.nthu.edu.tw/~s101062124/bootstrap/js/bootstrap.min.js"></script>
     <link href='http://m101.nthu.edu.tw/~s101062124/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
     <!-- use google font API -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
     <link href='main.css' rel='stylesheet' type='text/css'>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body bgcolor="#ccccff">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,16 +95,12 @@ function getMessage($cur){
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search friends" name="friendAccount" autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-<input type="button" class="btn btn-default btn-lg" onclick="window.location='update.php'" value="修改資料">
-</li>
-        <li>
-<input type="button" class="btn btn-default" onclick="window.location='logout.php'" value="登出">
-        </li>
-      </ul>
+      <div class="navbar-form navbar-right">
+<button class="btn btn-default" onclick="window.location='update.php'"><span class="glyphicon glyphicon-cog"></span> 修改資料</button>
+<button class="btn btn-default" onclick="window.location='logout.php'"><span class="glyphicon glyphicon-road"></span> 登出</button>
+      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

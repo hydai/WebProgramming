@@ -1,5 +1,5 @@
 * {
-    font-family: '新細明體' cursive;
+    font-family:'新細明體' cursive;
 }
 body {
     background: url(res/bg.jpg) no-repeat;
@@ -48,59 +48,59 @@ input:not([type]), input[type="password"] {
     height: 30px;
     width: 200;
 }
-#midPage{
+#midPage {
     position: absolute;
     left: 50;
     margin:0 auto;
     padding: 20px;
     border: 0px;
-    width: 800px;  
+    width: 800px;
     border-radius: 25px;
-    background:rgba(80%,50%,40%,0.2);
+    background:rgba(80%, 50%, 40%, 0.2);
 }
-#rightPage{
+#rightPage {
     position: absolute;
     left: 890;
     margin:0 auto;
     padding: 10px;
     border: 0px;
-    width: 250px;  
+    width: 250px;
 }
-#friend_top{
+#friend_top {
     border: 1px;
     border-style: dashed;
     padding: 10px;
     border-radius: 20px;
-    background:rgba(80%,50%,0%,0.5);
+    background:rgba(80%, 50%, 0%, 0.5);
 }
-.friend{
+.friend {
     width:80%;
-    background:rgba(80%,50%,50%,0.7);
+    background:rgba(80%, 50%, 50%, 0.7);
     margin: 5px;
     border-radius: 10px;
-    box-shadow: 3px 3px 2px rgb(50%,20%,20%);
+    box-shadow: 3px 3px 2px rgb(50%, 20%, 20%);
 }
-.msgTable{
+.msgTable {
     padding: 5px;
     width: 60%;
     border-style: groove;
 }
 #add, #delete {
-    background:rgba(80%,50%,50%,0.7);
+    background:rgba(80%, 50%, 50%, 0.7);
     border-radius: 10px;
 }
-#add:hover, #delete:hover{
-    background:rgb(80%,60%,60%);
+#add:hover, #delete:hover {
+    background:rgb(80%, 60%, 60%);
     font-size: 20;
     cursor: pointer;
 }
-hr.style-two{
+hr.style-two {
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,.2), rgba(0,0,0,0.85), rgba(0,0,0,.2)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,.2), rgba(0,0,0,0.85), rgba(0,0,0,.2)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,.2), rgba(0,0,0,0.85), rgba(0,0,0,.2)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,.2), rgba(0,0,0,0.85), rgba(0,0,0,.2)); 
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
 }
 hr.style-one {
     border: 0;
@@ -114,4 +114,3 @@ hr.style-three {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-

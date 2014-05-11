@@ -1,12 +1,21 @@
 * {
-    font-family:'新細明體' cursive;
+    font-family: 'Open Sans', sans-serif, '新細明體' cursive;
 }
 body {
+    margin-top: 70px;
     background: url(res/bg.jpg) no-repeat;
     background-size: cover;
 }
+h1 {
+    text-align: center;
+    text-shadow: 2px 2px black;
+}
 #init {
-    width:30%;
+    width:28%;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 2px 2px black;
 }
 #loginC {
     font-size: 24px;
@@ -14,6 +23,16 @@ body {
     text-align: left;
     padding: 20px;
     background: rgba(18, 182, 128, 0.4);
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+}
+#errmsg {
+    font-size:28px;
+    color: red;
+    text-align: left;
+    padding: 18px;
+    background: rgba(38, 200, 192, 0.3);
     -webkit-border-radius: 24px;
     -moz-border-radius: 24px;
     border-radius: 24px;
@@ -28,6 +47,27 @@ body {
     -moz-border-radius: 24px;
     border-radius: 24px;
 }
+#updateC {
+    font-size: 24px;
+    color: #dddddd;
+    text-align: left;
+    padding: 20px;
+    background: rgba(18, 182, 128, 0.4);
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+}
+#updateC input[type="text"],
+#updateC input[type="password"] {
+    font-size: 18px;
+    height: 30px;
+    width: 200px;
+}
+.buttons {
+    margin-top: 2%;
+    width: 100%;
+    text-align: center;
+}
 input {
     font-size: 18px;
     font-weight: bold;
@@ -37,16 +77,19 @@ input {
     border-radius: 12px;
     padding:2px;
     margin: 2px;
+    text-shadow: 0px 0px black;
 }
 input:not([type]), input[type="text"] {
     font-size: 18px;
     height: 30px;
-    width: 200;
+    width: 250px;
+    color: black;
 }
 input:not([type]), input[type="password"] {
     font-size: 18px;
     height: 30px;
-    width: 200;
+    width: 250px;
+    color: black;
 }
 #midPage {
     position: absolute;

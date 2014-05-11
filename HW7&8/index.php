@@ -74,39 +74,59 @@ function getMessage($cur){
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
     <title>Fakebook - Home</title>
+    <script src="http://m101.nthu.edu.tw/~s101062124/bootstrap/js/bootstrap.min.js"></script>
+    <link href='http://m101.nthu.edu.tw/~s101062124/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
     <!-- use google font API -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
     <link href='main.css' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body bgcolor="#ccccff">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.php">Fakebook</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left" role="search" action="findFriend.php" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search friends" name="friendAccount" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+<input type="button" class="btn btn-default btn-lg" onclick="window.location='update.php'" value="修改資料">
+</li>
+        <li>
+<input type="button" class="btn btn-default" onclick="window.location='logout.php'" value="登出">
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 <?php
 echo "Hi, user ".$_SESSION['NAME']."(".$_SESSION['NICKNAME'].")<br>";
 echo "Your email: ".$_SESSION['EMAIL']."<br><br>";
 ?>
-<input type="button" onclick="window.location='logout.php'" value="登出">
-<input type="button" onclick="window.location='update.php'" value="修改資料">
 <hr>
-<form action="findFriend.php" method="post">
-Search users by account<br>
-<input type="text" name="friendAccount" autocomplete="off">
-<input type="submit">
-</form>
-<hr>
-Your friend list<br>
-<?php
-// TODO: Friend list
-loadFriendList();
-?>
-<hr>
+<div class="panel panel-primary">
+<div class="panel-heading">
+        <h3 class="panel-title">Post</h3>
+      </div>
+      <div class="panel-body">
 <form action="sentPost.php" method="post">
-Post:<br><br>
 <input type="radio" name="type" value="0" checked>公開<br>
 <input type="radio" name="type" value="1">好友可見<br><br>
 <textarea name="postStr" cols="50" rows="6" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="在這裡輸入訊息～"></textarea><br>
-<input type="submit" value="發文">
+<input type="submit" value="發文" class="btn btn-default btn-lg">
 </form>
+      </div>
+</div>
 <hr>
 <?php
 // TODO: Post wall

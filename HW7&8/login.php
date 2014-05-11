@@ -39,8 +39,10 @@ else {
     <title>Fakebook - Login</title>
     <!-- use google font API -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
-    <link href='main.css' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://m101.nthu.edu.tw/~s101062124/bootstrap/js/bootstrap.min.js"></script>
+    <link href='http://m101.nthu.edu.tw/~s101062124/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href='main.css' rel='stylesheet' type='text/css'>
 <script type="text/javascript">
 $(function(){
     $('#regC').hide();
@@ -75,15 +77,11 @@ $(function(){
                             <input type="password" name="password" autocomplete="off">
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" value="Log in">
-                        </td>
-                        <td>
-                            <input type="button" id="regBt" value="Sign Up">
-                        </td>
-                    </tr>
                 </table>
+<div class="buttons">
+                            <input type="submit" value="Log in" class="btn btn-default btn-lg">
+                            <input type="button" id="regBt" class="btn btn-default btn-lg" value="Sign Up">
+</div>
             </form>
         </div>
         <div id="errmsg">

@@ -10,6 +10,43 @@ if($_SESSION['ACCOUNT']==null){
 ?>
 
 <?php
+function getPH($target) {
+    $getFileInfoSql = "SELECT * FROM IMGMP WHERE MID = '$target'";
+    $getFileResult = mysql_query($getFileInfoSql);
+    if (mysql_num_rows($getFileResult) > 0) {
+        $tmp = mysql_fetch_array($getFileResult);
+        $getTypeSql = "SELECT * FROM FILES WHERE PID='".$tmp['PID']."'";
+        $getTypeResult = mysql_query($getTypeSql);
+        $tmp2 = mysql_fetch_array($getTypeResult);
+        $filename = "./fileArea/files/".$tmp['PID'].".".$tmp2['FILETYPE'];
+    } else {
+        $filename = "./fileArea/default.png";
+    }
+
+    return $filename;
+}
+function getFile($target) {
+    $tmp = "";
+    $tmp2 = "";
+    $picTypes = array("gif", "jpeg", "jpg", "png");
+    $fileTypes = array("txt", "doc", "pdf");
+    $getFileInfoSql = "SELECT * FROM IMGMP WHERE MID = '$target'";
+    $getFileResult = mysql_query($getFileInfoSql);
+    if (mysql_num_rows($getFileResult) > 0) {
+        $tmp = mysql_fetch_array($getFileResult);
+        $getTypeSql = "SELECT * FROM FILES WHERE PID='".$tmp['PID']."'";
+        $getTypeResult = mysql_query($getTypeSql);
+        $tmp2 = mysql_fetch_array($getTypeResult);
+        $filename = "./fileArea/files/".$tmp['PID'].".".$tmp2['FILETYPE'];
+    } else {
+        $filename = "./fileArea/default.png";
+    }
+    if (in_array($tmp2['FILETYPE'], $picTypes)) {
+        return "<img src='".$filename."' class='img-rounded postph'>";
+    } else {
+        return "<a href='$filename'>".$tmp2['FILENAME']."</a>";
+    }
+}
 function getHP($target) {
     $findSql = "SELECT ID FROM USER where ID='$target'";
     $findResult = mysql_query($findSql);
@@ -18,7 +55,7 @@ function getHP($target) {
         $getResult = mysql_query($getHPSql);
         if (mysql_num_rows($getResult) > 0) {
             $tmp = mysql_fetch_array($getResult);
-            $filename = "./fileArea/photos/".$tmp['PID'].$tmp['FILETYPE'];
+            $filename = "./fileArea/photos/".$tmp['PID'].".".$tmp['FILETYPE'];
         } else {
             $filename = "./fileArea/default.png";
         }
@@ -77,7 +114,13 @@ function getMessage($cur){
     echo '<tr class="info">';
     echo '<td id="masterP"><img src="'.getHP($messageID).'" alt="Head photo" class="img-rounded hp"> Master: '.$title.'</td>';
     echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
-    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
+    $checkPicSql = "SELECT * FROM IMGMP WHERE MID='".$cur['POSTID']."'";
+    $checkResult = mysql_query($checkPicSql);
+    if (mysql_num_rows($checkResult) > 0) {
+        echo "<tr class='active'><td colspan=\"2\">".getFile($cur['POSTID'])." ".$message."</td></tr>";
+    } else {
+        echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
+    }
     loadReply($cur['POSTID']);
     echo "<tr><td colspan=\"2\">";
     echo '<form action="replyPost.php" method="post">';
@@ -97,7 +140,7 @@ function getMessage($cur){
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
-    <title>Fakebook - Home</title>
+    <title>Fakebook - Index</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://m101.nthu.edu.tw/~s101062124/bootstrap/js/bootstrap.min.js"></script>
     <link href='http://m101.nthu.edu.tw/~s101062124/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
@@ -140,7 +183,7 @@ echo "<br><small>Welcome to fakebook</small></h1>";
         <h3 class="panel-title">Post</h3>
       </div>
       <div class="panel-body">
-<form action="sentPost.php" method="post" class="form-horizontal">
+<form action="sentPost.php" method="post" class="form-horizontal" enctype="multipart/form-data">
 <fieldset>
 <div class="form-group" id="postIndent">
 <label class="control-label" style="font-size:30px">設定權限</label>
@@ -155,6 +198,10 @@ echo "<br><small>Welcome to fakebook</small></h1>";
       好友可見</label>
     </div>
 <textarea class="form-control postTextArea" name="postStr" cols="50" rows="6" onfocus="this.select()" placeholder="在這裡輸入訊息～"></textarea><br>
+                        <input id="fileC" type="file" name="file">
+    <p class="help-block">圖片支援格式: png, jpg, jpeg, gif(直接顯示于動態)</p>
+    <p class="help-block">文件支援格式: txt, doc, pdf</p>
+    <p class="help-block">若上傳不支援格式, 會自動移除檔案</p>
 <input type="submit" value="發文" class="btn btn-default btn-lg">
 </div>
 </fieldset>

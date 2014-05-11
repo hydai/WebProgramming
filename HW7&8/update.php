@@ -9,6 +9,23 @@ if($_SESSION['ACCOUNT']==null){ // 如果還沒登入過，則直接轉到登入
 } else {
 
 }
+function getHP($target) {
+    $findSql = "SELECT ID FROM USER where ID='$target'";
+    $findResult = mysql_query($findSql);
+    if (mysql_num_rows($findResult) > 0) {
+        $getHPSql = "SELECT * FROM HEADPHOTO where MASTERID='$target'";
+        $getResult = mysql_query($getHPSql);
+        if (mysql_num_rows($getResult) > 0) {
+            $tmp = mysql_fetch_array($getResult);
+            $filename = "./fileArea/photos/".$tmp['PID'].".".$tmp['FILETYPE'];
+        } else {
+            $filename = "./fileArea/default.png";
+        }
+    } else {
+        $filename = "./fileArea/default.png";
+    }
+    return $filename;
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +72,12 @@ if($_SESSION['ACCOUNT']==null){ // 如果還沒登入過，則直接轉到登入
 
     <div id="init">
         <div id="updateC">
-            <form action="updateF.php" method="post">
+            <form action="updateF.php" method="post" enctype="multipart/form-data">
+                    <?php
+                        echo '<img src="'.getHP($_SESSION["ID"]).'" alt="Head photo" class="img-thumbnail hpb">';
+                    ?>
+                        <input id="fileC" type="file" name="file">
+<hr>
                 <table>
                     <tr>
                         <td align="left">帳號：</td>
@@ -99,15 +121,11 @@ if($_SESSION['ACCOUNT']==null){ // 如果還沒登入過，則直接轉到登入
                             <input type="text" name="email" placeholder="youremail@example.com" autocomplete="off" value="<?php echo $_SESSION[EMAIL];?>">
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" value="Submit">
-                        </td>
-                        <td>
-                            <input type="button" onclick="window.location='index.php'" value="Cancel">
-                        </td>
-                    </tr>
                 </table>
+<div class="buttons">
+                            <input type="submit" value="Submit" class="btn btn-default">
+                            <input type="button" onclick="window.location='index.php'" value="Cancel" class="btn btn-default">
+</div>
             </form>
         </div>
         <div id="errmsg">

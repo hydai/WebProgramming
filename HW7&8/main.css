@@ -3,7 +3,7 @@
 }
 body {
     margin-top: 70px;
-    background: url(res/bg.jpg) no-repeat;
+    background: url(res/bgs.jpg) no-repeat center center fixed;
     background-size: cover;
 }
 h1 {
@@ -76,6 +76,10 @@ h1 {
     width: 40px;
     height: 40px;
 }
+.hpb {
+    width: 140px;
+    height: 140px;
+}
 #ph h1 {
     margin-left: 5%;
     color: white;
@@ -83,6 +87,10 @@ h1 {
 }
 #ph h1 small {
     color: white;
+}
+.postph {
+    width: 60%;
+    height: auto;
 }
 .form-group label {
     font-size: 24px;
@@ -123,69 +131,7 @@ input:not([type]), input[type="password"] {
     width: 250px;
     color: black;
 }
-#midPage {
-    position: absolute;
-    left: 50;
-    margin:0 auto;
-    padding: 20px;
-    border: 0px;
-    width: 800px;
-    border-radius: 25px;
-    background:rgba(80%, 50%, 40%, 0.2);
-}
-#rightPage {
-    position: absolute;
-    left: 890;
-    margin:0 auto;
-    padding: 10px;
-    border: 0px;
-    width: 250px;
-}
-#friend_top {
-    border: 1px;
-    border-style: dashed;
-    padding: 10px;
-    border-radius: 20px;
-    background:rgba(80%, 50%, 0%, 0.5);
-}
-.friend {
-    width:80%;
-    background:rgba(80%, 50%, 50%, 0.7);
-    margin: 5px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 2px rgb(50%, 20%, 20%);
-}
-.msgTable {
-    padding: 5px;
-    width: 60%;
-    border-style: groove;
-}
-#add, #delete {
-    background:rgba(80%, 50%, 50%, 0.7);
-    border-radius: 10px;
-}
-#add:hover, #delete:hover {
-    background:rgb(80%, 60%, 60%);
-    font-size: 20;
-    cursor: pointer;
-}
-hr.style-two {
-    border: 0;
-    height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
-    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
-    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
-    background-image: -o-linear-gradient(left, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, .2));
-}
-hr.style-one {
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-hr.style-three {
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+#fileC {
+    font-size: 16px;
+
 }

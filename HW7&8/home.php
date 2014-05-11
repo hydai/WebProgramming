@@ -30,6 +30,28 @@ if ($homeID != 0) {
 }
 ?>
 <?php
+function getFile($target) {
+    $tmp = "";
+    $tmp2 = "";
+    $picTypes = array("gif", "jpeg", "jpg", "png");
+    $fileTypes = array("txt", "doc", "pdf");
+    $getFileInfoSql = "SELECT * FROM IMGMP WHERE MID = '$target'";
+    $getFileResult = mysql_query($getFileInfoSql);
+    if (mysql_num_rows($getFileResult) > 0) {
+        $tmp = mysql_fetch_array($getFileResult);
+        $getTypeSql = "SELECT * FROM FILES WHERE PID='".$tmp['PID']."'";
+        $getTypeResult = mysql_query($getTypeSql);
+        $tmp2 = mysql_fetch_array($getTypeResult);
+        $filename = "./fileArea/files/".$tmp['PID'].".".$tmp2['FILETYPE'];
+    } else {
+        $filename = "./fileArea/default.png";
+    }
+    if (in_array($tmp2['FILETYPE'], $picTypes)) {
+        return "<img src='".$filename."' class='img-rounded postph'>";
+    } else {
+        return "<a href='$filename'>".$tmp2['FILENAME']."</a>";
+    }
+}
 function getHP($target) {
     $findSql = "SELECT ID FROM USER where ID='$target'";
     $findResult = mysql_query($findSql);
@@ -38,7 +60,7 @@ function getHP($target) {
         $getResult = mysql_query($getHPSql);
         if (mysql_num_rows($getResult) > 0) {
             $tmp = mysql_fetch_array($getResult);
-            $filename = "./fileArea/photos/".$tmp['PID'].$tmp['FILETYPE'];
+            $filename = "./fileArea/photos/".$tmp['PID'].".".$tmp['FILETYPE'];
         } else {
             $filename = "./fileArea/default.png";
         }
@@ -146,7 +168,13 @@ function getMessage($cur, $homeInfo){
     } else {
         echo '<td><button onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
     }
-    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
+    $checkPicSql = "SELECT * FROM IMGMP WHERE MID='".$cur['POSTID']."'";
+    $checkResult = mysql_query($checkPicSql);
+    if (mysql_num_rows($checkResult) > 0) {
+        echo "<tr class='active'><td colspan=\"2\">".getFile($cur['POSTID'])." ".$message."</td></tr>";
+    } else {
+        echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
+    }
     loadReply($cur['POSTID']);
     echo "<tr><td colspan=\"2\">";
     echo '<form action="sendReply.php" method="post">';

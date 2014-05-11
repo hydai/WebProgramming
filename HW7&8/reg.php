@@ -82,7 +82,7 @@ if ($errflag == false) {
 } else {
     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
     session_write_close();
-    header("location: register.php");
+    header("location: login.php");
     exit();
 }
 

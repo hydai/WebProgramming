@@ -38,15 +38,29 @@ else {
 <head>
     <title>Fakebook - Login</title>
     <!-- use google font API -->
-    <link href='http://fonts.googleapis.com/css?family=Lemon|Codystar|PT+Mono' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
     <link href='main.css' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('#regC').hide();
+    $('#regBt').on('click', function(){
+        $("#regC").slideToggle(500);
+        $("#errmsg").hide();
+    });
+    $('#cancelBt').on('click', function(){
+        $("#regC").slideToggle(500);
+        $("#errmsg").hide();
+    });
+});
+</script>
 </head>
 
 <body bgcolor="#ccccff">
 
     <div id="init">
         <div id="loginC">
+        <h1>Fakebook</h1>
             <form action="login.php" method="post">
                 <table>
                     <tr>
@@ -66,17 +80,20 @@ else {
                             <input type="submit" value="Log in">
                         </td>
                         <td>
-                            <input type="button" onclick="window.location='register.php'" value="Sign Up">
+                            <input type="button" id="regBt" value="Sign Up">
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
-        <div id="regC">
+        <div id="errmsg">
+    <script type="text/javascript">$('#errmsg').hide();</script>
 <?php
 session_start();
 if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
-    echo '<ul style="padding:0; color:red;">';
+    echo '<script type="text/javascript">$("#errmsg").slideToggle(100);</script>';
+    echo '<h3>Register Error</h3>';
+    echo '<ul>';
     foreach($_SESSION['ERRMSG_ARR'] as $msg) {
         echo '<li>',$msg,'</li>';
     }
@@ -84,26 +101,37 @@ if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count
     unset($_SESSION['ERRMSG_ARR']);
 }
 ?>
+    </div>
+        <div id="regC">
             <form action="reg.php" method="post">
-                帳號：
-                <input type="text" name="account" placeholder="A-Z, 0-9, a-z, length >= 6" autocomplete="off">
-                <br/>密碼：
-                <input type="password" name="password" placeholder="length >= 7" autocomplete="off">
-                <br/>密碼確認：
-                <input type="password" name="passwordrepeat" placeholder="Repeat above" autocomplete="off">
-                <br/>姓名：
-                <input type="text" name="name" placeholder="yourName" autocomplete="off">
-                <br/>暱稱：
-                <input type="text" name="nickname" placeholder="yourNickname" autocomplete="off">
-                <br/>
-                <!--Not support Sex nuw
-             性別：<input type="text" name="sex" placeholder="Male/Female" autocomplete="off"><br/>
-        -->
-                E-mail：
-                <input type="text" name="email" placeholder="youremail@example.com" autocomplete="off">
-                <br/>
-                <input type="submit">
-                <input type="button" onclick="window.location='login.php'" value="Cancel">
+<table>
+<tr>
+<td align="left">帳號：</td>
+<td align="right"><input type="text" name="account" placeholder="A-Z, 0-9, a-z, length >= 6" autocomplete="off"></td>
+</tr>
+<tr>
+<td align="left">密碼：</td>
+<td align="right"><input type="password" name="password" placeholder="length >= 7" autocomplete="off">
+</td>
+</tr>
+<tr>
+<td align="left">確認：</td>
+<td align="right"><input type="password" name="passwordrepeat" placeholder="Repeat above" autocomplete="off"></td>
+</tr>
+<tr><td align="left">姓名：</td>
+<td align="right"><input type="text" name="name" placeholder="yourName" autocomplete="off">
+                </td></tr>
+<tr><td align="left">暱稱：</td>
+<td align="right"><input type="text" name="nickname" placeholder="yourNickname" autocomplete="off"></td>
+</tr>
+<tr><td align="left">信箱：</td>
+                <td align="right"><input type="text" name="email" placeholder="youremail@example.com" autocomplete="off"></td>
+</tr>
+<tr>
+<td><input type="submit" value="Submit"></td>
+<td><input type="button" id="cancelBt" value="Cancel"></td>
+</tr>
+</table>
             </form>
         </div>
     </div>

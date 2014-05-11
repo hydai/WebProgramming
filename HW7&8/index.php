@@ -73,6 +73,11 @@ function getMessage($cur){
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <head>
+    <title>Fakebook - Home</title>
+    <!-- use google font API -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
+    <link href='main.css' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body bgcolor="#ccccff">
 

@@ -125,11 +125,11 @@ if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count
 <tr><td align="left">信箱：</td>
                 <td align="right"><input type="text" name="email" placeholder="youremail@example.com" autocomplete="off"></td>
 </tr>
-<tr>
-<td><input type="submit" value="Submit"></td>
-<td><input type="button" id="cancelBt" value="Cancel"></td>
-</tr>
 </table>
+<div class="buttons">
+<input type="submit" value="Submit" class="btn btn-default">
+<input type="button" id="cancelBt" value="Cancel" class="btn btn-default">
+</div>
             </form>
         </div>
     </div>

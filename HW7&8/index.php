@@ -32,9 +32,9 @@ function getReplyMessage($cur) {
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
 
-    echo "<tr><td>Reply: ".$tmp['NICKNAME']."</td>";
-    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
-    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
+    echo '<tr class="warning"><td id="slaveP">Reply: '.$tmp["NICKNAME"].'</td>';
+    echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
+    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
 }
 function loadReply($id) {
     $getPostSql = "SELECT * FROM MESSAGE WHERE MASTERID='".$id."'";
@@ -52,22 +52,30 @@ function getMessage($cur){
     }
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
-    echo "<table border=\"1\"><tr>";
-    echo "<td>Master: ".$title."</td>";
-    echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
-    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
-    //TODO: Reply message
+    echo '<div class="panel panel-primary" id="postC">';
+    echo '<div class="panel-heading">';
+    //echo '<h3 class="panel-title">Master: '.$title.'</h3>';
+    echo '</div>';
+    echo '<div class="panel-body">';
+    echo '<table class="table table-bordered">';
+    echo '<tr class="info">';
+    echo '<td id="masterP">Master: '.$title.'</td>';
+    echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
+    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
     loadReply($cur['POSTID']);
     echo "<tr><td colspan=\"2\">";
     echo '<form action="replyPost.php" method="post">';
-    echo '<textarea name="reply" cols="45" rows="3" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="留言......"></textarea>';
+    echo '<textarea class="form-control postTextArea" name="reply" cols="45" rows="3" onfocus="this.select()" placeholder="留言......"></textarea>';
     //echo '</td><td>';
     echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
     echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
-    echo '<input type="submit" value="送出">';
+    echo '<input class="btn btn-default" type="submit" value="送出">';
     echo '</form>';
     echo '</td></tr>';
     echo "</table><br><br>";
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
 }
 ?>
 <!DOCTYPE html>
@@ -111,22 +119,35 @@ echo "<br><small>Welcome to fakebook</small></h1>";
 ?>
 </div>
 
-<div class="panel panel-primary">
+<div class="panel panel-primary" id="postC">
 <div class="panel-heading">
         <h3 class="panel-title">Post</h3>
       </div>
       <div class="panel-body">
-<form action="sentPost.php" method="post">
-<input type="radio" name="type" value="0" checked>公開<br>
-<input type="radio" name="type" value="1">好友可見<br><br>
-<textarea name="postStr" cols="50" rows="6" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="在這裡輸入訊息～"></textarea><br>
+<form action="sentPost.php" method="post" class="form-horizontal">
+<fieldset>
+<div class="form-group" id="postIndent">
+<label class="control-label" style="font-size:30px">設定權限</label>
+    <div class="radio">
+     <label>
+      <input id="inlineradio1" name="sampleinlineradio" value="0" type="radio">
+      公開</label>
+    </div>
+    <div class="radio">
+     <label>
+      <input id="inlineradio2" name="sampleinlineradio" value="1" type="radio">
+      好友可見</label>
+    </div>
+<textarea class="form-control postTextArea" name="postStr" cols="50" rows="6" onfocus="this.select()" placeholder="在這裡輸入訊息～"></textarea><br>
 <input type="submit" value="發文" class="btn btn-default btn-lg">
+</div>
+</fieldset>
 </form>
       </div>
 </div>
+</div>
 <hr>
 <?php
-// TODO: Post wall
 loadPostWall();
 ?>
 </body>

@@ -63,18 +63,38 @@ h1 {
     height: 30px;
     width: 200px;
 }
+#postC {
+    margin-left: 5%;
+    margin-right: 5%;
+}
 .buttons {
     margin-top: 2%;
     width: 100%;
     text-align: center;
 }
 #ph h1 {
-    margin-left: 2%;
+    margin-left: 5%;
     color: white;
     text-align:left;
 }
 #ph h1 small {
     color: white;
+}
+.form-group label {
+    font-size: 24px;
+}
+.postTextArea {
+    font-size: 16px;
+    overflow:hidden;
+    border-color:#ddccff;
+    color: black;
+}
+#masterP,
+#slaveP {
+    font-size: 24px;
+}
+#postIndent {
+    padding: 1%;
 }
 input {
     font-size: 18px;

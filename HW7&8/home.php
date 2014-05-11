@@ -93,13 +93,13 @@ function getReplyMessage($cur) {
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
 
-    echo "<tr><td>Reply: ".$tmp['NICKNAME']."</td>";
+    echo "<tr class='warning' id='slaveP'><td>Reply: ".$tmp['NICKNAME']."</td>";
     if ($cur['OWNERID'] != $_SESSION['ID']) {
-        echo '<td><input type="button" value="Delete" disabled="disabled"></td></tr>';
+        echo '<td><button class="btn btn-default" disabled="disabled">Delete</button></td></tr>';
     } else {
-        echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+        echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
     }
-    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
+    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
 }
 function loadReply($id) {
     $getPostSql = "SELECT * FROM MESSAGE WHERE MASTERID='".$id."'";
@@ -117,27 +117,33 @@ function getMessage($cur, $homeInfo){
     }
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
-    echo "<table border=\"1\"><tr>";
-    echo "<td>Master: ".$title."</td>";
+    echo '<div class="panel panel-primary" id="postC">';
+    echo '<div class="panel-heading">';
+    echo '</div>';
+    echo '<div class="panel-body">';
+    echo '<table class="table table-bordered">';
+    echo '<tr class="info">';
+    echo "<td id='masterP'>Master: ".$title."</td>";
     if ($_SESSION['ID'] != $cur['OWNERID']) {
-        echo '<td><input type="button" value="Delete" disabled="disabled"></td></tr>';
+        echo '<td><button class="btn btn-default" disabled="disabled">Delete</button></td></tr>';
     } else {
-        echo '<td><input type="button" value="Delete" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'"></td></tr>';
+        echo '<td><button onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
     }
-    echo "<tr><td colspan=\"2\">".$message."</td></tr>";
-    //TODO: Reply message
+    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
     loadReply($cur['POSTID']);
     echo "<tr><td colspan=\"2\">";
     echo '<form action="sendReply.php" method="post">';
-    echo '<textarea name="reply" cols="45" rows="3" onfocus="this.select()" style="font-size: 16px; overflow:hidden; border:5px double; border-color:#ddccff" placeholder="留言......"></textarea>';
+    echo '<textarea class="form-control postTextArea" name="reply" cols="45" rows="3" onfocus="this.select()" placeholder="留言......"></textarea>';
     //echo '</td><td>';
     echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
     echo '<input type="hidden" name="owner" value="'.$cur['OWNERID'].'">';
     echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
-    echo '<input type="submit" value="送出">';
+    echo '<button class="btn btn-default" type="submit">送出</button>';
     echo '</form>';
     echo '</td></tr>';
     echo "</table><br><br>";
+    echo '</div>';
+    echo '</div>';
 }
 ?>
 <!DOCTYPE html>
@@ -168,6 +174,7 @@ function getMessage($cur, $homeInfo){
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
       </form>
       <div class="navbar-form navbar-right">
+<button class="btn btn-default" onclick="window.location='index.php'"><span class="glyphicon glyphicon-home"></span> 回到首頁</button>
 <button class="btn btn-default" onclick="window.location='update.php'"><span class="glyphicon glyphicon-cog"></span> 修改資料</button>
 <button class="btn btn-default" onclick="window.location='logout.php'"><span class="glyphicon glyphicon-road"></span> 登出</button>
       </div>
@@ -186,16 +193,10 @@ if ($homeID == 0) {
 }
 else {
     echo "<h1>Welcome to ".$homeInfo['NAME']."(".$homeInfo['NICKNAME'].")'s page!</h1>";
-    echo "<hr>";
 }
 ?>
 </div>
-
-<input type="button" onclick="window.location='index.php'" value="回到首頁">
-
-<hr>
 <?php
-// TODO: Post wall
 loadPostWall($homeID, $homeInfo);
 ?>
 </body>

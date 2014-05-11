@@ -11,7 +11,8 @@ else {
     $removeID = $_GET['rid'];
     $removePost = "DELETE FROM MESSAGE WHERE (POSTID='$removeID' OR MASTERID='$removeID')";
     mysql_query($removePost);
-    header("location: index.php");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    //header("location: index.php");
 }
 ?>
 

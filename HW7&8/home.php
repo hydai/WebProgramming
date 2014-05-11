@@ -36,17 +36,21 @@ if ($homeID != 0) {
         $getFriendResult = mysql_query($getFriendSql);
         if ($homeID != $_SESSION['ID']) {
             if (mysql_num_rows($getFriendResult) > 0) {
-                echo '<form action="removeFriend.php" method="post">';
-                echo '<input type="submit" value="已加好友，按此鍵刪除">';
+                echo '<form class="navbar-form navbar-right" action="removeFriend.php" method="post">';
+                echo '<div class="form-group">';
+                echo '<button class="btn btn-default" type="submit">已加好友，按此鍵刪除</button>';
                 echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
                 echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
+                echo '</div>';
                 echo '</form>';
                 $isFriends = true;
             } else {
-                echo '<form action="addFriend.php" method="post">';
-                echo '<input type="submit" value="加好友">';
+                echo '<form class="navbar-form navbar-right" action="addFriend.php" method="post">';
+                echo '<div class="form-group">';
+                echo '<button type="submit" class="btn btn-default">加好友</button>';
                 echo '<input type="hidden" name="selfID" value="'.$_SESSION['ID'].'">';
                 echo '<input type="hidden" name="wantID" value="'.$homeID.'">';
+                echo '</div>';
                 echo '</form>';
             }
         }
@@ -167,20 +171,25 @@ function getMessage($cur, $homeInfo){
 <button class="btn btn-default" onclick="window.location='update.php'"><span class="glyphicon glyphicon-cog"></span> 修改資料</button>
 <button class="btn btn-default" onclick="window.location='logout.php'"><span class="glyphicon glyphicon-road"></span> 登出</button>
       </div>
+      <?php
+if ($homeID != 0) {
+    friendOption($homeID);}
+?>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+<div class="page-header" id="ph">
 <?php
 if ($homeID == 0) {
-    echo "Sorry, nobody is here.";
+    echo "<h1>Sorry, nobody is here.</h1>";
 }
 else {
-    echo "Welcome to ".$homeInfo['NAME']."(".$homeInfo['NICKNAME'].")'s page!<br>";
+    echo "<h1>Welcome to ".$homeInfo['NAME']."(".$homeInfo['NICKNAME'].")'s page!</h1>";
     echo "<hr>";
-    friendOption($homeID);
 }
 ?>
+</div>
 
 <input type="button" onclick="window.location='index.php'" value="回到首頁">
 

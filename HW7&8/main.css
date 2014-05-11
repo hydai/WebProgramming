@@ -68,6 +68,14 @@ h1 {
     width: 100%;
     text-align: center;
 }
+#ph h1 {
+    margin-left: 2%;
+    color: white;
+    text-align:left;
+}
+#ph h1 small {
+    color: white;
+}
 input {
     font-size: 18px;
     font-weight: bold;

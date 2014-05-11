@@ -104,12 +104,13 @@ function getMessage($cur){
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
+<div class="page-header" id="ph">
 <?php
-echo "Hi, user ".$_SESSION['NAME']."(".$_SESSION['NICKNAME'].")<br>";
-echo "Your email: ".$_SESSION['EMAIL']."<br><br>";
+echo "<h1>Hi, user ".$_SESSION['NAME']."(".$_SESSION['NICKNAME'].")";
+echo "<br><small>Welcome to fakebook</small></h1>";
 ?>
-<hr>
+</div>
+
 <div class="panel panel-primary">
 <div class="panel-heading">
         <h3 class="panel-title">Post</h3>

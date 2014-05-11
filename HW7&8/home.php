@@ -30,6 +30,23 @@ if ($homeID != 0) {
 }
 ?>
 <?php
+function getHP($target) {
+    $findSql = "SELECT ID FROM USER where ID='$target'";
+    $findResult = mysql_query($findSql);
+    if (mysql_num_rows($findResult) > 0) {
+        $getHPSql = "SELECT * FROM HEADPHOTO where MASTERID='$target'";
+        $getResult = mysql_query($getHPSql);
+        if (mysql_num_rows($getResult) > 0) {
+            $tmp = mysql_fetch_array($getResult);
+            $filename = "./fileArea/photos/".$tmp['PID'].$tmp['FILETYPE'];
+        } else {
+            $filename = "./fileArea/default.png";
+        }
+    } else {
+        $filename = "./fileArea/default.png";
+    }
+    return $filename;
+}
     function friendOption($homeID) {
         $tmp = $_SESSION['ID'];
         $getFriendSql = "SELECT * FROM FRIEND WHERE ( MASTER='$tmp' AND SLAVE='$homeID' )";
@@ -93,7 +110,7 @@ function getReplyMessage($cur) {
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
 
-    echo "<tr class='warning' id='slaveP'><td>Reply: ".$tmp['NICKNAME']."</td>";
+    echo '<tr class="warning"><td id="slaveP"><img src="'.getHP($cur['OWNERID']).'" alt="Head photo" class="img-rounded hp"> Reply: '.$tmp["NICKNAME"].'</td>';
     if ($cur['OWNERID'] != $_SESSION['ID']) {
         echo '<td><button class="btn btn-default" disabled="disabled">Delete</button></td></tr>';
     } else {
@@ -123,7 +140,7 @@ function getMessage($cur, $homeInfo){
     echo '<div class="panel-body">';
     echo '<table class="table table-bordered">';
     echo '<tr class="info">';
-    echo "<td id='masterP'>Master: ".$title."</td>";
+    echo '<td id="masterP"><img src="'.getHP($messageID).'" alt="Head photo" class="img-rounded hp"> Master: '.$title.'</td>';
     if ($_SESSION['ID'] != $cur['OWNERID']) {
         echo '<td><button class="btn btn-default" disabled="disabled">Delete</button></td></tr>';
     } else {

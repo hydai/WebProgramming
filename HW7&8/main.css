@@ -72,6 +72,10 @@ h1 {
     width: 100%;
     text-align: center;
 }
+.hp {
+    width: 40px;
+    height: 40px;
+}
 #ph h1 {
     margin-left: 5%;
     color: white;

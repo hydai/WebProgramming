@@ -10,6 +10,23 @@ if($_SESSION['ACCOUNT']==null){
 ?>
 
 <?php
+function getHP($target) {
+    $findSql = "SELECT ID FROM USER where ID='$target'";
+    $findResult = mysql_query($findSql);
+    if (mysql_num_rows($findResult) > 0) {
+        $getHPSql = "SELECT * FROM HEADPHOTO where MASTERID='$target'";
+        $getResult = mysql_query($getHPSql);
+        if (mysql_num_rows($getResult) > 0) {
+            $tmp = mysql_fetch_array($getResult);
+            $filename = "./fileArea/photos/".$tmp['PID'].$tmp['FILETYPE'];
+        } else {
+            $filename = "./fileArea/default.png";
+        }
+    } else {
+        $filename = "./fileArea/default.png";
+    }
+    return $filename;
+}
 function loadPostWall() {
     $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$_SESSION['ID']."' AND MASTERID='0') ORDER BY POSTID DESC";
     $getPostResult = mysql_query($getPostSql);
@@ -32,7 +49,7 @@ function getReplyMessage($cur) {
     $message = htmlspecialchars($cur['MESSAGE']);
     $message = str_replace("\n", "<br/>", $message);
 
-    echo '<tr class="warning"><td id="slaveP">Reply: '.$tmp["NICKNAME"].'</td>';
+    echo '<tr class="warning"><td id="slaveP"><img src="'.getHP($cur['OWNERID']).'" alt="Head photo" class="img-rounded hp"> Reply: '.$tmp["NICKNAME"].'</td>';
     echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
     echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
 }
@@ -54,12 +71,11 @@ function getMessage($cur){
     $message = str_replace("\n", "<br/>", $message);
     echo '<div class="panel panel-primary" id="postC">';
     echo '<div class="panel-heading">';
-    //echo '<h3 class="panel-title">Master: '.$title.'</h3>';
     echo '</div>';
     echo '<div class="panel-body">';
     echo '<table class="table table-bordered">';
     echo '<tr class="info">';
-    echo '<td id="masterP">Master: '.$title.'</td>';
+    echo '<td id="masterP"><img src="'.getHP($messageID).'" alt="Head photo" class="img-rounded hp"> Master: '.$title.'</td>';
     echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
     echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
     loadReply($cur['POSTID']);

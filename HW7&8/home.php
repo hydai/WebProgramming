@@ -138,7 +138,13 @@ function getReplyMessage($cur) {
     } else {
         echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
     }
-    echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
+    $checkPicSql = "SELECT * FROM IMGMP WHERE MID='".$cur['POSTID']."'";
+    $checkResult = mysql_query($checkPicSql);
+    if (mysql_num_rows($checkResult) > 0) {
+        echo "<tr class='active'><td colspan=\"2\">".getFile($cur['POSTID'])." ".$message."</td></tr>";
+    } else {
+        echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
+    }
 }
 function loadReply($id) {
     $getPostSql = "SELECT * FROM MESSAGE WHERE MASTERID='".$id."'";
@@ -177,12 +183,13 @@ function getMessage($cur, $homeInfo){
     }
     loadReply($cur['POSTID']);
     echo "<tr><td colspan=\"2\">";
-    echo '<form action="sendReply.php" method="post">';
+    echo '<form action="sendReply.php" method="post" enctype="multipart/form-data">';
     echo '<textarea class="form-control postTextArea" name="reply" cols="45" rows="3" onfocus="this.select()" placeholder="留言......"></textarea>';
     //echo '</td><td>';
     echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
     echo '<input type="hidden" name="owner" value="'.$cur['OWNERID'].'">';
     echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
+    echo '<input id="fileC" type="file" name="file">';
     echo '<button class="btn btn-default" type="submit">送出</button>';
     echo '</form>';
     echo '</td></tr>';

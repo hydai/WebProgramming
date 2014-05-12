@@ -10,21 +10,6 @@ if($_SESSION['ACCOUNT']==null){
 ?>
 
 <?php
-function getPH($target) {
-    $getFileInfoSql = "SELECT * FROM IMGMP WHERE MID = '$target'";
-    $getFileResult = mysql_query($getFileInfoSql);
-    if (mysql_num_rows($getFileResult) > 0) {
-        $tmp = mysql_fetch_array($getFileResult);
-        $getTypeSql = "SELECT * FROM FILES WHERE PID='".$tmp['PID']."'";
-        $getTypeResult = mysql_query($getTypeSql);
-        $tmp2 = mysql_fetch_array($getTypeResult);
-        $filename = "./fileArea/files/".$tmp['PID'].".".$tmp2['FILETYPE'];
-    } else {
-        $filename = "./fileArea/default.png";
-    }
-
-    return $filename;
-}
 function getFile($target) {
     $tmp = "";
     $tmp2 = "";

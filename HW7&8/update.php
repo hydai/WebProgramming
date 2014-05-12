@@ -1,30 +1,12 @@
 <?php
 session_start();
-include("dbInc.php");
+include_once("dbInc.php");
+include_once("utility.php");
 ?>
 
 <?php
 if($_SESSION['ACCOUNT']==null){ // 如果還沒登入過，則直接轉到登入頁面
     echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
-} else {
-
-}
-function getHP($target) {
-    $findSql = "SELECT ID FROM USER where ID='$target'";
-    $findResult = mysql_query($findSql);
-    if (mysql_num_rows($findResult) > 0) {
-        $getHPSql = "SELECT * FROM HEADPHOTO where MASTERID='$target'";
-        $getResult = mysql_query($getHPSql);
-        if (mysql_num_rows($getResult) > 0) {
-            $tmp = mysql_fetch_array($getResult);
-            $filename = "./fileArea/photos/".$tmp['PID'].".".$tmp['FILETYPE'];
-        } else {
-            $filename = "./fileArea/default.png";
-        }
-    } else {
-        $filename = "./fileArea/default.png";
-    }
-    return $filename;
 }
 ?>
 

@@ -13,6 +13,32 @@ else {
     $acc = preg_replace("/[^A-Za-z0-9]/","",$acc);
     $pwd = preg_replace("/[^A-Za-z0-9]/","",$pwd);
     if($acc!=NULL && $pwd!=NULL){
+        $mysqli = getMysqli();
+        $sql = "SELECT * FROM USER where ACCOUNT = ?";
+        /* create a prepared statement */
+        if ($stmt = $mysqli->prepare($sql)) {
+            /* bind parameters for markers */
+            $stmt->bind_param("s", $acc);
+            /* execute query */
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($tmp = $result->fetch_array(MYSQLI_BOTH)) {
+                if ($tmp['PWD'] == md5($pwd)) {
+                    $_SESSION['ID'] = $row['ID'];
+                    $_SESSION['ACCOUNT'] = $row['ACCOUNT'];
+                    $_SESSION['PWD'] = $row['PWD'];
+                    $_SESSION['NICKNAME'] = $row['NICKNAME'];
+                    $_SESSION['NAME'] = $row['NAME'];
+                    $_SESSION['SEX'] = $row['SEX'];
+                    $_SESSION['EMAIL'] = $row['EMAIL'];
+                    echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
+                }
+            }
+            /* close statement */
+            $stmt->close();
+        }
+        closeMysqli($mysqli);
+        /*
         $sql = "SELECT * FROM USER where ACCOUNT = '$acc'";
         $result = mysql_query($sql);
         $row = mysql_fetch_array($result);
@@ -27,6 +53,7 @@ else {
             $_SESSION['EMAIL'] = $row['EMAIL'];
             echo '<meta http-equiv=REFRESH CONTENT=0;url=index.php>';
         }
+         */
     }
 
 }

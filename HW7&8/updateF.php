@@ -81,18 +81,66 @@ if (!empty($_FILES['file']['name'])) {
         // Write back to db
         
         $ffname = $_FILES["file"]["name"];
+        $mysqli = getMysqli();
+        $sql = "SELECT PID FROM HEADPHOTO WHERE MASTERID=?";
+        $num_of_rows = 0;
+        /* create a prepared statement */
+        if ($stmt = $mysqli->prepare($sql)) {
+            /* bind parameters for markers */
+            $stmt->bind_param("i", $_SESSION['ID']);
+            /* execute query */
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $num_of_rows = $result->num_rows;
+            /* close statement */
+            $stmt->close();
+        }
+        closeMysqli($mysqli);
+        /*
         $sltID = "SELECT PID FROM HEADPHOTO WHERE MASTERID='".$_SESSION["ID"]."'";
         $sltResult = mysql_query($sltID);
+         */
         $ffname = preg_replace("/[^A-Za-z0-9]/","",$ffname);
-        if (mysql_fetch_row($sltResult) > 0) {
-            $addPicSql = "UPDATE HEADPHOTO SET MASTERID='".$_SESSION['ID']."', FILENAME='".$ffname."', FILETYPE='".$extension."'";
+        $sql = "";
+        if ($num_of_rows > 0) {
+            $sql = "UPDATE HEADPHOTO SET MASTERID=?, FILENAME=?, FILETYPE=?";
         } else {
-            $addPicSql = "INSERT INTO HEADPHOTO (MASTERID, FILENAME, FILETYPE) VALUES ('".$_SESSION['ID']."', '".$ffname."', '".$extension."')";
+            $sql = "INSERT INTO HEADPHOTO (MASTERID, FILENAME, FILETYPE) VALUES (?,?,?)";
         }
+        $mysqli = getMysqli();
+        /* create a prepared statement */
+        if ($stmt = $mysqli->prepare($sql)) {
+            /* bind parameters for markers */
+            $stmt->bind_param("iss", $_SESSION['ID'], $ffname, $extension);
+            /* execute query */
+            $stmt->execute();
+            /* close statement */
+            $stmt->close();
+        }
+        closeMysqli($mysqli);
+        $mysqli = getMysqli();
+        $sql = "SELECT PID FROM HEADPHOTO WHERE MASTERID=?";
+        $storename = -1;
+        /* create a prepared statement */
+        if ($stmt = $mysqli->prepare($sql)) {
+            /* bind parameters for markers */
+            $stmt->bind_param("i", $_SESSION['ID']);
+            /* execute query */
+            $stmt->execute();
+            $stmt->bind_result($pid);
+            while ($stmt->fetch()) {
+                $storename = $pid;
+            }
+            /* close statement */
+            $stmt->close();
+        }
+        closeMysqli($mysqli);
+        /*
         mysql_query($addPicSql);
         $sltResult = mysql_query($sltID);
         $row = mysql_fetch_array($sltResult);
         $storename = $row['PID'];
+         */
         move_uploaded_file($_FILES["file"]["tmp_name"], "fileArea/photos/".$storename.".".$extension);
     }
 }
@@ -100,12 +148,42 @@ if ($errflag == false) {
     // query
     $password = md5($password);
     if ($isResetPwd == true) {
+        $mysqli = getMysqli();
+        $sql = "UPDATE USER SET PWD = ?";
+        $storename = -1;
+        /* create a prepared statement */
+        if ($stmt = $mysqli->prepare($sql)) {
+            /* bind parameters for markers */
+            $stmt->bind_param("s", $password);
+            /* execute query */
+            $stmt->execute();
+            /* close statement */
+            $stmt->close();
+        }
+        closeMysqli($mysqli);
+        /*
         $sql = "UPDATE USER SET PWD = '$password'";
         mysql_query($sql);
+         */
         $_SESSION['PWD'] = $password;
     }
+    $mysqli = getMysqli();
+    $sql = "UPDATE USER SET NAME = ?, NICKNAME = ?, SEX = ?, EMAIL = ? WHERE ACCOUNT = ?";
+    $storename = -1;
+    /* create a prepared statement */
+    if ($stmt = $mysqli->prepare($sql)) {
+        /* bind parameters for markers */
+        $stmt->bind_param("sssss", $name, $nickname, $sex, $email, $account);
+        /* execute query */
+        $stmt->execute();
+        /* close statement */
+        $stmt->close();
+    }
+    closeMysqli($mysqli);
+    /*
     $sql = "UPDATE USER SET NAME = '$name', NICKNAME = '$nickname', SEX = '$sex', EMAIL = '$email' WHERE ACCOUNT = '$account'";
     mysql_query($sql);
+     */
     // save data to session
     $_SESSION['NAME'] = $name;
     $_SESSION['NICKNAME'] = $nickname;

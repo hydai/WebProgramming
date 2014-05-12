@@ -1,132 +1,38 @@
 <?php
 session_start();
 include_once("dbInc.php");
-?>
+include_once("utility.php");
 
-<?php
 if($_SESSION['ACCOUNT']==null){
     echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
 }
-?>
-
-<?php
-function getFile($target) {
-    $tmp = "";
-    $tmp2 = "";
-    $picTypes = array("gif", "jpeg", "jpg", "png");
-    $fileTypes = array("txt", "doc", "pdf");
-    $getFileInfoSql = "SELECT * FROM IMGMP WHERE MID = '$target'";
-    $getFileResult = mysql_query($getFileInfoSql);
-    if (mysql_num_rows($getFileResult) > 0) {
-        $tmp = mysql_fetch_array($getFileResult);
-        $getTypeSql = "SELECT * FROM FILES WHERE PID='".$tmp['PID']."'";
-        $getTypeResult = mysql_query($getTypeSql);
-        $tmp2 = mysql_fetch_array($getTypeResult);
-        $filename = "./fileArea/files/".$tmp['PID'].".".$tmp2['FILETYPE'];
-    } else {
-        $filename = "./fileArea/default.png";
-    }
-    if (in_array($tmp2['FILETYPE'], $picTypes)) {
-        return "<img src='".$filename."' class='img-rounded postph'>";
-    } else {
-        return "<a href='$filename'>".$tmp2['FILENAME']."</a>";
-    }
-}
-function getHP($target) {
-    $findSql = "SELECT ID FROM USER where ID='$target'";
-    $findResult = mysql_query($findSql);
-    if (mysql_num_rows($findResult) > 0) {
-        $getHPSql = "SELECT * FROM HEADPHOTO where MASTERID='$target'";
-        $getResult = mysql_query($getHPSql);
-        if (mysql_num_rows($getResult) > 0) {
-            $tmp = mysql_fetch_array($getResult);
-            $filename = "./fileArea/photos/".$tmp['PID'].".".$tmp['FILETYPE'];
-        } else {
-            $filename = "./fileArea/default.png";
+function iloadPostWall() {
+    $mysqli = getMysqli();
+    $sql = "SELECT * FROM MESSAGE WHERE (OWNERID=? AND MASTERID='0') ORDER BY POSTID DESC";
+    /* create a prepared statement */
+    if ($stmt = $mysqli->prepare($sql)) {
+        /* bind parameters for markers */
+        $stmt->bind_param("i", $_SESSION['ID']);
+        /* execute query */
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($posts = $result->fetch_array(MYSQLI_BOTH)) {
+            getMessage($posts, $homeInfo);
         }
-    } else {
-        $filename = "./fileArea/default.png";
+        /* close statement */
+        $stmt->close();
     }
-    return $filename;
-}
-function loadPostWall() {
+    closeMysqli($mysqli);
+    /*
     $getPostSql = "SELECT * FROM MESSAGE WHERE (OWNERID='".$_SESSION['ID']."' AND MASTERID='0') ORDER BY POSTID DESC";
     $getPostResult = mysql_query($getPostSql);
     while ($posts = mysql_fetch_array($getPostResult)) {
         getMessage($posts);
     }
-}
-function removePost($removeID) {
-    $removePost = "DELETE FROM MESSAGE WHERE (POSTID='$removeID' OR MASTERID='$removeID')";
-    mysql_query($removePost);
-    header("location: index.php");
+     */
 }
 function loadFriendList() {
     echo "Friend list is loading";
-}
-function getReplyMessage($cur) {
-    $getUserNicknameSql = "SELECT NICKNAME FROM USER WHERE ID = '".$cur['OWNERID']."'";
-    $getUserNicknameResult = mysql_query($getUserNicknameSql);
-    $tmp = mysql_fetch_array($getUserNicknameResult);
-    $message = htmlspecialchars($cur['MESSAGE']);
-    $message = str_replace("\n", "<br/>", $message);
-
-    echo '<tr class="warning"><td id="slaveP"><img src="'.getHP($cur['OWNERID']).'" alt="Head photo" class="img-rounded hp"> Reply: '.$tmp["NICKNAME"].'</td>';
-    echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
-    $checkPicSql = "SELECT * FROM IMGMP WHERE MID='".$cur['POSTID']."'";
-    $checkResult = mysql_query($checkPicSql);
-    if (mysql_num_rows($checkResult) > 0) {
-        echo "<tr class='active'><td colspan=\"2\">".getFile($cur['POSTID'])." ".$message."</td></tr>";
-    } else {
-        echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
-    }
-}
-function loadReply($id) {
-    $getPostSql = "SELECT * FROM MESSAGE WHERE MASTERID='".$id."'";
-    $getPostResult = mysql_query($getPostSql);
-    while ($posts = mysql_fetch_array($getPostResult)) {
-        getReplyMessage($posts);
-    }
-}
-function getMessage($cur){
-    $messageID = $cur['OWNERID'];
-    if ($messageID == $_SESSION['ID']) {
-        $title = $_SESSION['NICKNAME'];
-    } else {
-        $title = "Not support friends' posts now";
-    }
-    $message = htmlspecialchars($cur['MESSAGE']);
-    $message = str_replace("\n", "<br/>", $message);
-    echo '<div class="panel panel-primary" id="postC">';
-    echo '<div class="panel-heading">';
-    echo '</div>';
-    echo '<div class="panel-body">';
-    echo '<table class="table table-bordered">';
-    echo '<tr class="info">';
-    echo '<td id="masterP"><img src="'.getHP($messageID).'" alt="Head photo" class="img-rounded hp"> Master: '.$title.'</td>';
-    echo '<td><button class="btn btn-default" onclick="self.location=\'deletePost.php?rid='.$cur['POSTID'].'\'">Delete</button></td></tr>';
-    $checkPicSql = "SELECT * FROM IMGMP WHERE MID='".$cur['POSTID']."'";
-    $checkResult = mysql_query($checkPicSql);
-    if (mysql_num_rows($checkResult) > 0) {
-        echo "<tr class='active'><td colspan=\"2\">".getFile($cur['POSTID'])." ".$message."</td></tr>";
-    } else {
-        echo "<tr class='active'><td colspan=\"2\">".$message."</td></tr>";
-    }
-    loadReply($cur['POSTID']);
-    echo "<tr><td colspan=\"2\">";
-    echo '<form action="replyPost.php" method="post" enctype="multipart/form-data">';
-    echo '<textarea class="form-control postTextArea" name="reply" cols="45" rows="3" onfocus="this.select()" placeholder="留言......"></textarea>';
-    echo '<input id="fileC" type="file" name="file">';
-    //echo '</td><td>';
-    echo '<input type="hidden" name="master" value="'.$cur['POSTID'].'">';
-    echo '<input type="hidden" name="muser" value="'.$_SESSION["ID"].'">';
-    echo '<input class="btn btn-default" type="submit" value="送出">';
-    echo '</form>';
-    echo '</td></tr>';
-    echo "</table><br><br>";
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
 }
 ?>
 <!DOCTYPE html>
@@ -203,7 +109,7 @@ echo "<br><small>Welcome to fakebook</small></h1>";
 </div>
 <hr>
 <?php
-loadPostWall();
+iloadPostWall();
 ?>
 </body>
 </html>

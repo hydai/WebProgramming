@@ -189,7 +189,7 @@ function loadPostWall($homeID, $homeInfo) {
         $stmt->close();
     }
     closeMysqli($mysqli);
-    
+
 }
 function removePost($removeID) {
     $mysqli = getMysqli();

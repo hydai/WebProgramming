@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("dbInc.php");
-include_once("utility.php");
+//include_once("utility.php");
 
 if($_SESSION['ACCOUNT']==null){
     echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
